@@ -1,36 +1,70 @@
 # Getting Started
 
-Fork → clone → run locally in 5 minutes.
+Fork → clone → run locally. No Redis, no PostgreSQL, no Node.js, no Yarn.
 
 ---
 
-## Prerequisites
+## 1. Fork the repository
 
-| Tool | Version | Install |
-|---|---|---|
-| Ruby | 4.0.1 | `mise install ruby@4.0.1` (see `.mise.toml`) |
-| mise | latest | https://mise.jdx.dev |
-| libvips | 8.15+ | `apt install libvips-dev` / `brew install vips` |
-| SQLite | 3.45+ | Usually pre-installed on macOS/Linux |
+Go to the Fieldnotes repo on GitHub → click **Fork** (top right) → this creates your own copy.
 
-No Redis, no PostgreSQL, no Node.js, no Yarn.
-
----
-
-## Setup
+Then clone your fork:
 
 ```bash
-# 1. Clone
-git clone https://github.com/YOUR_USER/fieldnotes.git
+git clone https://github.com/YOUR_GITHUB_USER/fieldnotes.git
 cd fieldnotes
+```
 
-# 2. Install Ruby (if not already)
-mise install
+---
 
-# 3. Install dependencies + create database
-bin/setup
+## 2. Install prerequisites
 
-# 4. Start the development server
+### macOS
+
+```bash
+brew install mise vips sqlite
+```
+
+### Ubuntu / Debian
+
+```bash
+# mise
+curl https://mise.jdx.dev/install.sh | sh
+echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+source ~/.bashrc
+
+# system libraries
+sudo apt update
+sudo apt install -y libvips-dev libsqlite3-dev build-essential
+```
+
+### Verify
+
+```bash
+mise --version    # should print version
+vips --version    # should print 8.15+
+sqlite3 --version # should print 3.45+
+```
+
+---
+
+## 3. Install Ruby and dependencies
+
+```bash
+mise install          # installs Ruby 4.0.1 from .mise.toml
+bin/setup             # installs gems, creates database, prepares assets
+```
+
+**If `bin/setup` fails:**
+- `Could not find gem` → run `gem install bundler` then `bin/setup` again
+- `vips/vips.h not found` → libvips not installed (see step 2)
+- `sqlite3.h missing` → install `libsqlite3-dev` (Ubuntu) or `sqlite` (macOS)
+
+---
+
+## 4. Start the development server
+
+```bash
 bin/dev
 ```
 
@@ -38,61 +72,57 @@ Open http://localhost:3000 — you should see the homepage.
 
 ---
 
-## Create your admin user
+## 5. Create your admin account
+
+Option A — seed file (easiest):
+
+```bash
+bin/rails db:seed
+# Creates admin@example.com / password: "changeme"
+# Change these in db/seeds.rb before running
+```
+
+Option B — Rails console:
 
 ```bash
 bin/rails console
 ```
 
 ```ruby
-User.create!(
-  email_address: "you@example.com",
-  password: "your_secure_password"
-)
+User.create!(email_address: "you@example.com", password: "your_secure_password")
+exit
 ```
 
 Admin panel: http://localhost:3000/admin
 
 ---
 
-## Environment variables
+## 6. Make it yours
 
-Development works with zero configuration. For production, set these in `.env` or Kamal secrets:
-
-| Variable | Required | Description |
-|---|---|---|
-| `SECRET_KEY_BASE` | yes | `bin/rails secret` to generate |
-| `RAILS_MASTER_KEY` | yes | Already in `config/master.key` (don't commit) |
-| `KAMAL_REGISTRY_PASSWORD` | deploy only | Docker registry token |
-
-No API keys needed — Open Library and all v1 integrations are free and keyless.
+| What | How |
+|---|---|
+| Content | Add essays, projects, books via admin panel |
+| Colors & spacing | Edit `app/assets/stylesheets/tokens.css` |
+| Fonts | Swap `.woff2` files in `app/assets/fonts/`, update `@font-face` |
+| Hero photo | Upload via admin panel |
+| Watermark | Replace `app/assets/images/watermark.png` |
+| PWA icons | Replace `public/icons/icon-192.png` and `icon-512.png` |
+| Site name | Search for "Fieldnotes" in views and replace with your name |
 
 ---
 
 ## Key commands
 
 ```bash
-bin/dev          # Start dev server (Rails + Solid Queue)
-bin/ci           # Run full test suite (rubocop, brakeman, tests)
-bin/rails test   # Run unit + controller tests
-bin/rails test:system  # Run Capybara system tests
+bin/dev              # Start dev server (Rails + Solid Queue)
+bin/ci               # Run full test suite
+bin/rails test       # Unit + controller tests only
+bin/rails console    # Interactive Ruby console
+bin/rails db:seed    # Create initial admin user
 ```
 
 ---
 
-## Making it yours
+## Next step
 
-1. **Content:** Replace essays, projects, books via admin panel
-2. **Hero:** Replace the hero photo in Active Storage via admin
-3. **Branding:** Edit design tokens in `app/assets/stylesheets/tokens.css`
-4. **Fonts:** Swap `.woff2` files in `app/assets/fonts/` and update `@font-face` in stylesheets
-5. **Watermark:** Replace `app/assets/images/watermark.png` with your own
-6. **PWA icons:** Replace `public/icons/icon-192.png` and `icon-512.png`
-7. **Analytics:** Events auto-track via `Rails.event.notify` — no configuration needed
-
----
-
-## Project structure
-
-See `CLAUDE.md` for the full architecture overview, data models, routes, and coding conventions.
-See `docs/` for detailed guides on images, deployment, data export, and Rails 8 features.
+Ready to go live? See [`deployment.md`](deployment.md) — full guide from zero to production.
