@@ -1,0 +1,23 @@
+# Fieldnotes
+
+> Personal writing, projects, and field notes by the site author.
+
+## Essays
+Essays on software, technology, and the craft of building things.
+Available at /essays — each essay has a .md format for plain text access.
+
+## Now
+What I'm working on right now: /now
+
+## Builds
+A catalog of businesses, open-source projects, and media channels: /builds
+
+## Books
+What I'm reading and key ideas from each book: /books
+
+## Field
+Photo and video expedition series: /field
+
+## Feeds
+- RSS: /feed.rss
+- Sitemap: /sitemap.xml

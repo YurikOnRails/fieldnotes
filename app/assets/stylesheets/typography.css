@@ -1,0 +1,94 @@
+/* Self-hosted fonts — place .woff2 files in app/assets/fonts/ */
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/Onest-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/Onest-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/Onest-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/Onest-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base typography */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2rem;   margin-bottom: var(--space-6); }
+h2 { font-size: 1.5rem; margin-bottom: var(--space-4); }
+h3 { font-size: 1.25rem; }
+
+p { margin-bottom: var(--space-4); }
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover { color: var(--color-accent-hover); }
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+
+time { color: var(--color-muted); font-size: 0.875rem; }

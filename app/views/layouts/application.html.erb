@@ -25,7 +25,26 @@
   </head>
 
   <body>
-    <%= render "shared/flash" %>
-    <%= yield %>
+    <header class="site-header">
+      <nav class="site-nav">
+        <%= link_to "Essays",  essays_path,      data: { emoji: "✍️" } %>
+        <%= link_to "Builds",  builds_path,      data: { emoji: "🔧" } %>
+        <%= link_to "Reading", books_path,       data: { emoji: "📚" } %>
+        <%= link_to "Field",   field_index_path, data: { emoji: "📷" } %>
+        <%= link_to "Now",     now_path,         data: { emoji: "🌱" } %>
+      </nav>
+    </header>
+
+    <main class="site-main">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+
+    <footer class="site-footer">
+      <%= link_to "About",   about_path %>
+      <%= link_to "Uses",    uses_path %>
+      <%= link_to "Contact", contact_path %>
+      <%= link_to "RSS",     feed_path(format: :rss) %>
+    </footer>
   </body>
 </html>
