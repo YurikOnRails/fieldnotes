@@ -7,7 +7,7 @@ All photos: AVIF → WebP → JPEG. Never serve raw uploads. Never generate vari
 ## Variants
 
 ```ruby
-# Same set for craft_items, essay covers, project covers
+# Same set for field_items, essay covers, build covers
 VARIANTS = {
   thumb:  { resize_to_fill:  [400, 300],   format: :avif, saver: { quality: 75 } },
   medium: { resize_to_limit: [800, 600],   format: :avif, saver: { quality: 80 } },
@@ -65,7 +65,7 @@ export default class extends Controller {
 
 ---
 
-## Watermark (craft_items photos only)
+## Watermark (field_items photos only)
 
 Pipeline: `Original (stored clean) → watermark applied in-memory → AVIF/WebP variants`
 
@@ -89,7 +89,7 @@ end
 
 | Attachment | Watermark |
 |---|---|
-| `craft_items` photos | yes |
+| `field_items` photos | yes |
 | `essays` covers | optional |
 | `books` covers | no (third-party) |
 | Admin previews | no |

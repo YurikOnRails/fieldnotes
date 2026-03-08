@@ -39,9 +39,9 @@ disable by removing routes, nav link, and admin controllers.
 |---|---|
 | Essays | yes |
 | Now | yes |
-| Projects | optional |
+| Builds | optional — card grid catalog: businesses, OSS projects, channels, key links |
 | Books | optional — `key_idea` field is the point, not a Goodreads clone |
-| Craft | optional — photo/video series with AVIF pipeline and watermarks |
+| Field | optional — photo/video expedition series with AVIF pipeline and watermarks |
 
 ---
 
@@ -57,17 +57,18 @@ essays:       title, slug, excerpt, status(draft/published), published_at,
 now_entries:  body(rich text), published_at — has_paper_trail
 
 # OPTIONAL
-projects:     title, slug, description, status(active/paused/completed/abandoned),
-              url, repo_url, stack_tags, started_on, finished_on
+builds:       title, slug, description, url, icon_emoji,
+              status(active/paused/completed/archived), kind(business/oss/media/community/other),
+              position, started_on, finished_on
               has_one_attached :cover
 
 books:        title, author, cover_url, year_read, rating(1-5),
               key_idea(text), status(reading/completed/abandoned)
 
-craft_series: title, slug, description, kind(photo/video/mixed),
+field_series: title, slug, description, kind(photo/video/mixed),
               location, taken_on, latitude, longitude
 
-craft_items:  craft_series_id, kind(photo/video), caption, position, youtube_url
+field_items:  field_series_id, kind(photo/video), caption, position, youtube_url
               has_one_attached :photo
 
 # SYSTEM
@@ -84,9 +85,9 @@ root "public/feed#index"
 
 scope module: :public do
   resources :essays,   only: [:index, :show], param: :slug  # .rss + .md on show
-  resources :projects, only: [:index, :show], param: :slug  # .rss on index
+  resources :builds,   only: [:index]
   resources :books,    only: [:index]
-  resources :craft,    only: [:index, :show], param: :slug
+  resources :field,    only: [:index, :show], param: :slug
   get "/now",     to: "now#show"
   get "/feed",    to: "feed#index"    # .rss — unified feed
   get "/contact", to: "pages#contact"
@@ -98,15 +99,15 @@ get "/sitemap.xml", to: "sitemap#index", defaults: { format: :xml }
 
 namespace :admin do
   root "essays#index"
-  resources :essays, :projects, :books
-  resources :craft do
-    resources :craft_items, only: [:create, :destroy, :update]
+  resources :essays, :builds, :books
+  resources :field do
+    resources :field_items, only: [:create, :destroy, :update]
   end
   resource :now, only: [:edit, :update]
 end
 ```
 
-Nav: `Essays | Projects | Reading | Craft | Now`
+Nav: `Essays | Builds | Reading | Field | Now`
 Footer: /about · /uses · /contact · GitHub · RSS (`/feed.rss`)
 
 ---

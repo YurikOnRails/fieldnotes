@@ -101,7 +101,7 @@ Admin panel: http://localhost:3000/admin
 
 | What | How |
 |---|---|
-| Content | Add essays, projects, books via admin panel |
+| Content | Add essays, builds, books via admin panel |
 | Colors & spacing | Edit `app/assets/stylesheets/tokens.css` |
 | Fonts | Swap `.woff2` files in `app/assets/fonts/`, update `@font-face` |
 | Hero photo | Upload via admin panel |
@@ -113,9 +113,9 @@ Admin panel: http://localhost:3000/admin
 
 ## 7. Disable modules you don't need
 
-Essays and /now are core. Projects, Books, and Craft are optional.
+Essays and /now are core. Builds, Books, and Field are optional.
 
-To disable a module (e.g. Craft):
+To disable a module (e.g. Field):
 
 1. Remove routes from `config/routes.rb` (both public and admin)
 2. Remove the nav link from `app/views/layouts/application.html.erb`

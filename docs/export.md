@@ -11,16 +11,16 @@ Delivered via Turbo Stream notification with download link (expires 24h).
 fieldnotes-export-YYYY-MM-DD/
 ├── data/
 │   ├── essays.json
-│   ├── projects.json
+│   ├── builds.json
 │   ├── books.json
-│   ├── craft_series.json
-│   ├── craft_items.json
+│   ├── field_series.json
+│   ├── field_items.json
 │   ├── now_entries.json
 │   └── tags.json
 ├── files/
 │   ├── essays/covers/
-│   ├── craft/photos/
-│   └── projects/covers/
+│   ├── field/photos/
+│   └── builds/covers/
 └── README.md          # documents JSON format for importers
 ```
 

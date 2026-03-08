@@ -64,8 +64,8 @@ Fonts live in `app/assets/fonts/`. No CDN requests, no third-party tracking.
 │  HERO: wide portrait photo + name + tagline  │
 │  (who I am, 2-3 sentences, personal voice)  │
 ├─────────────────────────────────────────────┤
-│  Big tiles grid: Essays · Projects ·        │
-│  Reading · Craft · Now                      │
+│  Big tiles grid: Essays · Builds ·           │
+│  Reading · Field · Now                      │
 ├─────────────────────────────────────────────┤
 │  Recent: latest essay + latest project      │
 └─────────────────────────────────────────────┘

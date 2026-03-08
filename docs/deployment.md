@@ -251,7 +251,7 @@ Run this weekly at minimum. Store backups somewhere safe (another machine, cloud
 | Content | Avg size (AVIF) | Fits in 40GB |
 |---|---|---|
 | Essay covers | ~200KB | ~200,000 images |
-| Craft photos | ~535KB | ~74,000 photos |
+| Field photos | ~535KB | ~74,000 photos |
 | Typical use | mixed | Years of content |
 
 If you need more: Hetzner allows live disk resize, or switch Active Storage to S3-compatible.

@@ -9,11 +9,11 @@ No external services. No JS trackers. Just standard web protocols done right.
 
 | Feature | Implementation | Why |
 |---|---|---|
-| `sitemap.xml` | Auto-generated, cached 1h. Essays, projects, craft, static pages | Google indexing — table stakes |
-| JSON-LD | `Article` on essays, `Person` on /about, `Book` on /books, `CreativeWork` on projects | Rich snippets in search results |
+| `sitemap.xml` | Auto-generated, cached 1h. Essays, builds, field, static pages | Google indexing — table stakes |
+| JSON-LD | `Article` on essays, `Person` on /about, `Book` on /books, `CreativeWork` on builds | Rich snippets in search results |
 | Open Graph + Twitter meta | `og:title`, `og:description`, `og:image` on every public page | Beautiful previews when shared on Telegram, Twitter, LinkedIn |
 | `llms.txt` | Static file in `public/` — who you are, what's on the site, useful endpoints | AI agent discoverability (llmstxt.org) — one file, zero maintenance |
-| Full-text RSS | `/feed.rss` (all content), `/essays.rss`, `/projects.rss` | Loyal readers. RSS audience = exact target demographic |
+| Full-text RSS | `/feed.rss` (all content), `/essays.rss` | Loyal readers. RSS audience = exact target demographic |
 | `format.md` | `/essays/:slug.md` — already in Rails 8 features | CLI tools, AI agents, RSS readers that prefer plain text |
 | Canonical URLs | `<link rel="canonical">` on every page | Prevent duplicate content in search |
 
@@ -37,7 +37,7 @@ No external services. No JS trackers. Just standard web protocols done right.
 # Author: [Your Name]
 # Stack: Rails 8.1, Ruby 4, SQLite
 # Essays: /essays (HTML), /essays/:slug.md (Markdown), /essays.rss (RSS)
-# Projects: /projects
+# Builds: /builds
 # Books: /books
 # Contact: /contact
 ```
@@ -52,7 +52,7 @@ Full-text RSS — never excerpts. Respect the reader.
 # Responds to .rss via respond_to in controllers
 # /feed.rss     — unified feed (all content types)
 # /essays.rss   — essays only
-# /projects.rss — projects only
+# /builds.rss  — builds only
 ```
 
 ---

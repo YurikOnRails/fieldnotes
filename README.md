@@ -2,7 +2,7 @@
   <h1 align="center">Fieldnotes</h1>
   <p align="center">
     A personal site that's actually yours.<br>
-    Essays, projects, reading log, photography, and a /now page.<br>
+    Essays, builds, reading log, field expeditions, and a /now page.<br>
     One server. One database file. Zero trackers.
   </p>
   <p align="center">
@@ -64,13 +64,13 @@ If you need multi-author publishing, e-commerce, 50 plugins, or a visual drag-an
 
 ### Optional (enable what you need, remove what you don't)
 
-> **Projects** — portfolio with status tracking, repo links, stack tags
+> **Builds** — a visual grid of everything you've created: businesses, open source projects, media channels, communities, key links. Your personal catalog — like a Linktree, but built into your site and fully yours
 >
 > **Reading** — public reading log. One field matters: `key_idea` — what did you take away? Book covers auto-fetched from Open Library
 >
-> **Craft** — photo/video series with AVIF/WebP pipeline, watermarks, privacy-respecting YouTube embeds
+> **Field** — photo and video expedition series. Document your travels, explorations, and fieldwork. AVIF/WebP pipeline, watermarks, privacy-respecting YouTube embeds
 
-No hidden dependencies between modules. Don't shoot photos? Delete Craft — everything else works.
+No hidden dependencies between modules. Don't do expeditions? Remove Field — everything else works.
 
 ---
 
@@ -178,7 +178,7 @@ Fieldnotes is built in the open. Contributions welcome — especially from peopl
 
 ## Roadmap
 
-- [x] Essays, Projects, Books, Craft, Now
+- [x] Essays, Builds, Books, Field, Now
 - [x] Admin panel with Lexxy editor
 - [x] AVIF/WebP image pipeline
 - [x] Self-hosted analytics (zero JS)
