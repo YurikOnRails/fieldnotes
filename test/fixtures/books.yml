@@ -1,0 +1,25 @@
+completed_recent:
+  title: Clean Code
+  author: Robert Martin
+  status: completed
+  rating: 5
+  year_read: 2026
+
+completed_older:
+  title: Refactoring
+  author: Martin Fowler
+  status: completed
+  rating: 4
+  year_read: 2025
+
+reading_now:
+  title: SICP
+  author: Abelson & Sussman
+  status: reading
+  year_read:
+
+abandoned_one:
+  title: Boring Book
+  author: Someone
+  status: abandoned
+  year_read: 2024
