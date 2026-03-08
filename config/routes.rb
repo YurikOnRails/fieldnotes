@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get "/uses",    to: "pages#uses",     as: :uses
   end
 
-  get "/sitemap.xml", to: "sitemap#index", defaults: { format: :xml }
+  get "/sitemap.xml", to: "sitemap#index", defaults: { format: :xml }, as: :sitemap
 
   namespace :admin do
     root "essays#index"
