@@ -1,18 +1,7 @@
-# Fieldnotes
+# Fieldnotes — LLM Context
 
-**The Rails 8 reference app for personal sites.**
-
-Fork it, deploy to a $4/mo VPS in 15 minutes, make it yours.
-Digital garden: essays, projects, books, photography, /now page.
-
-Built on Rails 8.1 + Ruby 4 + SQLite. No Redis, no PaaS, no JS frameworks.
-One server, one deploy command, full ownership of your data. MIT license.
-
-**Why not Jekyll/Hugo/Next.js?** Full Rails app — admin panel, rich text editor,
-image pipeline, background jobs, real-time updates, self-hosted analytics.
-All the things static generators can't do, without the complexity of a JS stack.
-
-**Mission:** Demonstrate Rails 8 superiority for indie developers. Build personal brand.
+Instructions for AI assistants working on this codebase.
+For project overview, see `README.md`. For detailed guides, see `docs/`.
 
 ---
 
@@ -43,24 +32,16 @@ No Tailwind, no Preline, no Pico. All interactivity via Stimulus.
 
 ## Content Modules
 
-Fieldnotes is modular. Essays and /now are core. Everything else is optional —
-disable by removing routes, nav link, and admin controllers. No dead code left behind.
+Essays and /now are core. Everything else is optional —
+disable by removing routes, nav link, and admin controllers.
 
-| Module | Core? | Purpose |
-|---|---|---|
-| **Essays** | yes | Long-form writing — the heart of the site |
-| **Now** | yes | What you're doing right now (nownownow.com tradition) |
-| **Projects** | optional | Portfolio of work — active, paused, completed |
-| **Books** | optional | Public reading log — motivates reading, shares key ideas |
-| **Craft** | optional | Photo/video series — for makers with a camera |
-
-**Books** — not a Goodreads clone. The point is one sentence: `key_idea`. What did you
-take away from this book? This motivates reading with intent and sharing insights publicly.
-Covers fetched via Open Library API (free, no key) — see `docs/open-library.md`.
-
-**Craft** — first-class photo/video content, not an afterthought image gallery.
-Series with captions, positions, YouTube facade, AVIF/WebP pipeline, watermarks.
-If you don't shoot photos — remove it, the app works fine without it.
+| Module | Core? |
+|---|---|
+| Essays | yes |
+| Now | yes |
+| Projects | optional |
+| Books | optional — `key_idea` field is the point, not a Goodreads clone |
+| Craft | optional — photo/video series with AVIF pipeline and watermarks |
 
 ---
 
@@ -185,21 +166,3 @@ Write tests before implementation. No PR without tests.
 | Open Library API | [`docs/open-library.md`](docs/open-library.md) |
 | PWA manifest + service worker | [`docs/pwa.md`](docs/pwa.md) |
 | /pulse real-time dashboard (v2) | [`docs/pulse.md`](docs/pulse.md) |
-
----
-
-## Contributing
-
-Fieldnotes is open source. Contributions welcome — especially from people using it for their own sites.
-
-- `CONTRIBUTING.md` — how to set up, code style, PR process
-- Issues tagged `good first issue` — entrЯ y points for new contributors
-- Bug reports and Lexxy compatibility fixes are especially valuable
-
----
-
-## GitHub
-
-- **Description:** "The Rails 8 reference app for personal sites. Digital garden with essays, projects, books, photography & /now page. Ruby 4 · SQLite · Kamal 2. Fork, deploy to a $4/mo VPS, make it yours."
-- **Topics:** ruby-on-rails, personal-site, digital-garden, sqlite, kamal, self-hosted, rails-8, open-source, reference-app
-- **License:** MIT
