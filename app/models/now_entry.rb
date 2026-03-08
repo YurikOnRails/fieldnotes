@@ -3,6 +3,7 @@ class NowEntry < ApplicationRecord
 
   validates :published_at, presence: true
 
-  scope :latest,   -> { order(published_at: :desc).first }
   scope :previous, -> { order(published_at: :desc).offset(1) }
+
+  def self.latest = order(published_at: :desc).first
 end
