@@ -21,9 +21,11 @@ For project overview, see `README.md`. For detailed guides, see `docs/`.
 | Deploy | Kamal 2 |
 
 **Lexxy:** 37signals editor on Meta's Lexical. GitHub: https://github.com/basecamp/lexxy
-Check GitHub for current install instructions before implementing.
-We actively test and contribute fixes to Lexxy. If Lexxy breaks after update —
-pin the last working version in Gemfile, open an issue upstream, fix and PR.
+Current pinned version: `0.8.0.beta`. Replaces Trix completely — `form.rich_text_area` renders Lexxy automatically.
+Before upgrading — check GitHub for breaking changes first.
+If Lexxy breaks after update — pin the last working version in Gemfile, open an issue upstream, fix and PR.
+Rendered content requires `.lexxy-content` wrapper (see `app/views/layouts/action_text/contents/_content.html.erb`).
+Admin layout should load full `lexxy.css`; public layout only `lexxy-content.css` (split when admin layout is created at stage 12).
 
 **CSS:** Custom CSS + design tokens (`app/assets/stylesheets/tokens.css`).
 No Tailwind, no Preline, no Pico. All interactivity via Stimulus.
