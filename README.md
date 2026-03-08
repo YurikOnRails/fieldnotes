@@ -1,18 +1,18 @@
-<p align="center">
-  <h1 align="center">Fieldnotes</h1>
-  <p align="center">
+<div align="center">
+  <h1>Fieldnotes</h1>
+  <p>
     A personal site that's actually yours.<br>
     Essays, builds, reading log, field expeditions, and a /now page.<br>
     One server. One database file. Zero trackers.
   </p>
-  <p align="center">
+  <p>
     <a href="https://www.ruby-lang.org"><img src="https://img.shields.io/badge/Ruby-4.0.1-CC342D?style=flat-square&logo=ruby" alt="Ruby 4.0.1"></a>
-    <a href="https://rubyonrails.org"><img src="https://img.shields.io/badge/Rails-8.1-D30001?style=flat-square&logo=rubyonrails" alt="Rails 8.1"></a>
+    <a href="https://rubyonrails.org"><img src="https://img.shields.io/badge/Rails-8.1.2-D30001?style=flat-square&logo=rubyonrails" alt="Rails 8.1.2"></a>
     <a href="https://www.sqlite.org"><img src="https://img.shields.io/badge/SQLite-production-003B57?style=flat-square&logo=sqlite" alt="SQLite"></a>
     <a href="https://kamal-deploy.org"><img src="https://img.shields.io/badge/Kamal_2-deploy-4A154B?style=flat-square" alt="Kamal 2"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License"></a>
   </p>
-</p>
+</div>
 
 <!-- TODO: Replace with actual screenshot
 <p align="center">
@@ -76,7 +76,7 @@ No hidden dependencies between modules. Don't do expeditions? Remove Field — e
 
 ## Why not...
 
-| | The problem | Fieldnotes |
+| | ❌ The problem | ✅ Fieldnotes |
 |---|---|---|
 | **Hugo / Jekyll** | No admin panel. Edit files in git. No images, no jobs, no real-time. | Full app — write in a real editor, manage from the browser |
 | **WordPress** | PHP + MySQL + plugins that phone home. Security patches forever. | Ruby + SQLite. Minimal surface area. Zero third-party requests |
@@ -152,7 +152,7 @@ Enough for years of content and ~10,000 photos.
 
 ## Docs
 
-| | |
+| Doc | Description |
 |---|---|
 | [Getting Started](docs/getting-started.md) | Setup, prerequisites, admin account |
 | [Deployment](docs/deployment.md) | VPS, Kamal, SSL, backups |
@@ -172,7 +172,6 @@ Fieldnotes is built in the open. Contributions welcome — especially from peopl
 - Check out issues tagged [`good first issue`](../../labels/good%20first%20issue)
 - We write tests first — no PR is merged without tests
 - Lexxy compatibility fixes are especially valuable
-- See `CONTRIBUTING.md` for details
 
 ---
 
