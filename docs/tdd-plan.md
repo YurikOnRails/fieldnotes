@@ -169,7 +169,7 @@ end
 
 ## Этап 3: Модель NowEntry
 
-**Что делаем:** NowEntry с rich text и PaperTrail для истории ревизий.
+**Что делаем:** NowEntry с rich text. Каждое обновление — новая запись; история = все записи, отсортированные по `published_at desc`. Никакого paper_trail.
 
 **Red:**
 
@@ -191,23 +191,22 @@ class NowEntryTest < ActiveSupport::TestCase
     assert_respond_to entry, :body
   end
 
-  test "tracks versions with paper_trail" do
-    entry = now_entries(:current)
-    entry.update!(body: "Updated content")
-    assert entry.versions.any?
-  end
-
   test "latest scope returns most recent entry" do
     assert_equal now_entries(:current), NowEntry.latest
+  end
+
+  test "previous scope returns older entries ordered by published_at desc" do
+    result = NowEntry.previous
+    assert_not_includes result, now_entries(:current)
+    assert result.all? { it.published_at < now_entries(:current).published_at }
   end
 end
 ```
 
 **Green:**
-- Добавить `gem "paper_trail"` в Gemfile
-- Миграция: `now_entries` (published_at) + PaperTrail versions table
-- Модель: `has_paper_trail`, `has_rich_text :body`, scope `latest`
-- Фикстуры: `now_entries.yml`
+- Миграция: `now_entries` (published_at)
+- Модель: `has_rich_text :body`, scope `latest`, scope `previous`
+- Фикстуры: `now_entries.yml` (current + older)
 
 **Refactor:** —
 
@@ -748,9 +747,9 @@ class Public::NowControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "show displays revision history" do
+  test "show displays previous entries" do
     get now_url
-    assert_select ".revision-history"
+    assert_select ".previous-entries"
   end
 end
 ```
@@ -915,10 +914,10 @@ end
 
 # test/system/public/now_page_test.rb
 class Public::NowPageTest < ApplicationSystemTestCase
-  test "visitor sees current now entry with revision history" do
+  test "visitor sees current now entry and previous entries" do
     visit now_url
     assert_text "Now"
-    assert_selector ".revision-history"
+    assert_selector ".previous-entries"
   end
 end
 ```

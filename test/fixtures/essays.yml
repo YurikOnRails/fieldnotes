@@ -1,0 +1,16 @@
+draft:
+  title: Draft Essay
+  slug: draft-essay
+  status: draft
+
+published_old:
+  title: Old Published Essay
+  slug: old-published-essay
+  status: published
+  published_at: 2026-01-01 00:00:00
+
+published_new:
+  title: New Published Essay
+  slug: new-published-essay
+  status: published
+  published_at: 2026-03-01 00:00:00

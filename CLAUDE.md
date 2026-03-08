@@ -54,7 +54,8 @@ essays:       title, slug, excerpt, status(draft/published), published_at,
               has_rich_text :content   # Lexxy
               has_one_attached :cover
 
-now_entries:  body(rich text), published_at — has_paper_trail
+now_entries:  body(rich text), published_at
+              # multiple records = natural history; show latest + archive of previous
 
 # OPTIONAL
 builds:       title, slug, description, url, icon_emoji,
@@ -118,7 +119,6 @@ Footer: /about · /uses · /contact · GitHub · RSS (`/feed.rss`)
 - **ViewComponent** when used in 2+ places OR has render logic (cards, `<picture>`, meta tags, flash). **ERB partial** for one-off templates (admin forms, layouts, static pages, show views)
 - **Stimulus for JS** — never add preline.js or any JS UI framework
 - **Slugs human-readable:** `/essays/rails-sqlite-production-2026`
-- `paper_trail` on `NowEntry` for public revision history
 - **Never inline image variants** — warm via `ImageVariantJob` after upload
 - No videos stored locally — YouTube facade (`youtube-nocookie.com`)
 - No ActiveAdmin — custom controllers under `Admin::BaseController`
