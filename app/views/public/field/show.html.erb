@@ -1,0 +1,17 @@
+<h1><%= @series.title %></h1>
+<% if @series.description.present? %>
+  <p><%= @series.description %></p>
+<% end %>
+
+<% @series.field_items.ordered.each do |item| %>
+  <figure>
+    <% if item.photo.attached? %>
+      <%= image_tag item.photo %>
+    <% elsif item.youtube_url.present? %>
+      <p><%= item.youtube_url %></p>
+    <% end %>
+    <% if item.caption.present? %>
+      <figcaption><%= item.caption %></figcaption>
+    <% end %>
+  </figure>
+<% end %>

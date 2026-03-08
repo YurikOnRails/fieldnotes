@@ -1,0 +1,19 @@
+<h1>Now</h1>
+<% if @current %>
+  <div class="now-current">
+    <%= @current.body %>
+    <p><time datetime="<%= @current.published_at.iso8601 %>">Updated <%= @current.published_at.strftime("%B %d, %Y") %></time></p>
+  </div>
+<% end %>
+
+<% if @previous.any? %>
+  <section class="previous-entries">
+    <h2>Previous entries</h2>
+    <% @previous.each do |entry| %>
+      <details>
+        <summary><%= entry.published_at.strftime("%B %d, %Y") %></summary>
+        <%= entry.body %>
+      </details>
+    <% end %>
+  </section>
+<% end %>

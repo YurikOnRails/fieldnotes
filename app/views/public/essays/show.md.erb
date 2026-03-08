@@ -1,0 +1,10 @@
+# <%= @essay.title %>
+
+*Published: <%= @essay.published_at.strftime("%B %d, %Y") %>*
+<% if @essay.location_name.present? %>
+*Location: <%= @essay.location_name %>*
+<% end %>
+
+---
+
+<%= @essay.content.to_plain_text %>

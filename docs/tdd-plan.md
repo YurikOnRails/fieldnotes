@@ -21,7 +21,7 @@
 4. Jobs (ImageVariantJob, ExportJob)
 5. Controllers — Admin (CRUD)
 6. Controllers — Public (read-only + RSS/MD)
-7. ViewComponents (MetaTags, Cards, Picture)
+7. ERB partials + helpers (meta tags, cards, picture_tag)
 8. System tests (critical user flows)
 ```
 
@@ -796,57 +796,47 @@ end
 
 ---
 
-## Этап 15: ViewComponents
+## Этап 15: ERB partials + helpers
 
-**Что делаем:** переиспользуемые компоненты (MetaTags, карточки, PictureTag).
+**Что делаем:** переиспользуемые партиалы и хелперы (`app/views/shared/`, `ApplicationHelper`).
 
 **Red:**
 
 ```ruby
-# test/components/meta_tags_component_test.rb
-class MetaTagsComponentTest < ViewComponent::TestCase
-  test "renders title and og:title" do
-    meta = { title: "My Essay", description: "About Rails", image: "https://example.com/img.avif" }
-    render_inline(MetaTagsComponent.new(meta: meta))
-
-    assert_selector "title", text: "My Essay — Fieldnotes"
-    assert_selector 'meta[property="og:title"][content="My Essay"]', visible: false
-    assert_selector 'meta[property="og:description"]', visible: false
-    assert_selector 'meta[property="og:image"]', visible: false
+# test/helpers/application_helper_test.rb
+class ApplicationHelperTest < ActionView::TestCase
+  test "meta_tags renders og:title" do
+    result = meta_tags(title: "My Essay", description: "About Rails")
+    assert_match "og:title", result
   end
 
-  test "renders JSON-LD for article" do
-    meta = { title: "Essay", description: "Desc", type: :article, published_at: Time.current }
-    render_inline(MetaTagsComponent.new(meta: meta))
-
-    assert_includes rendered_content, '"@type":"Article"'
-  end
-end
-
-# test/components/essay_card_component_test.rb
-class EssayCardComponentTest < ViewComponent::TestCase
-  test "renders essay title and excerpt" do
-    essay = essays(:published_new)
-    render_inline(EssayCardComponent.new(essay: essay))
-
-    assert_text essay.title
-    assert_text essay.excerpt
+  test "meta_tags renders description" do
+    result = meta_tags(title: "My Essay", description: "About Rails")
+    assert_match "About Rails", result
   end
 
-  test "links to essay show page" do
-    essay = essays(:published_new)
-    render_inline(EssayCardComponent.new(essay: essay))
+  test "meta_tags renders JSON-LD for article type" do
+    result = meta_tags(title: "Essay", description: "Desc", type: :article, published_at: Time.current)
+    assert_match '"@type":"Article"', result
+  end
 
-    assert_selector "a[href='/essays/#{essay.slug}']"
+  test "picture_tag returns empty string when not attached" do
+    attachment = essays(:draft).cover
+    assert_equal "", picture_tag(attachment, alt: "test")
   end
 end
 ```
 
 **Green:**
-- Добавить `gem "view_component"` в Gemfile
-- `MetaTagsComponent` — title, OG tags, JSON-LD
-- `EssayCardComponent`, `BuildCardComponent`, `BookCardComponent`
-- `PictureComponent` — srcset с AVIF → WebP → JPEG fallback
+- `app/helpers/application_helper.rb` — `meta_tags(title:, description:, image: nil, type: :website, published_at: nil)`, `picture_tag(attachment, alt:, sizes: nil)`
+- `app/views/shared/_meta_tags.html.erb` — OG tags + canonical + JSON-LD
+- `app/views/shared/_essay_card.html.erb`, `_build_card.html.erb`, `_book_row.html.erb`, `_field_card.html.erb`
+- `app/views/shared/_flash.html.erb` — единый flash для обоих layouts
+- Обновить public show-вьюхи: `content_for(:title)` + `content_for(:head) { meta_tags(...) }`
+- Заменить inline карточки на index-страницах: `render "shared/essay_card", essay: essay`
+- Обновить layouts: title с суффиксом, `yield :head`, `render "shared/flash"`
+
+**Refactor:** после замены inline-разметки на партиалы — убедиться что system tests остаются зелёными.
 
 ---
 
@@ -1020,7 +1010,7 @@ end
 | 12 | Admin controllers | controller | 6 controllers + views |
 | 13 | Public controllers | controller | 7 controllers + views |
 | 14 | Sitemap + RSS | controller | controller + XML/RSS views |
-| 15 | ViewComponents | component | 5+ components |
+| 15 | ERB partials + helpers | helper | meta_tags, cards, picture_tag |
 | 16 | System tests | system | end-to-end flows |
 | 17 | Design tokens | system | CSS + fonts + layout |
 | 18 | PWA + finish | integration | PWA + seeds + llms.txt |

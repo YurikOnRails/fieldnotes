@@ -14,7 +14,7 @@ For project overview, see `README.md`. For detailed guides, see `docs/`.
 | Database | SQLite via Litestack |
 | Jobs / Cache / WS | Solid Queue · Solid Cache · Solid Cable |
 | Assets | Propshaft · Importmaps · Stimulus |
-| Views | ERB partials + ViewComponent (see rule below) |
+| Views | ERB partials + helpers |
 | Rich text | Action Text + **Lexxy** (beta — do NOT use Trix) |
 | Images | Active Storage + libvips → AVIF/WebP |
 | Auth | Rails built-in authentication generator |
@@ -118,7 +118,7 @@ Footer: /about · /uses · /contact · GitHub · RSS (`/feed.rss`)
 ## Coding Conventions
 
 - **Ruby 4.0 features welcome:** `it` block parameter, PRISM parser
-- **ViewComponent** when used in 2+ places OR has render logic (cards, `<picture>`, meta tags, flash). **ERB partial** for one-off templates (admin forms, layouts, static pages, show views)
+- **Views: ERB only, no ViewComponent gem.** Shared reusable markup → `app/views/shared/_partial.html.erb`. Tag-generating logic → helper method in `ApplicationHelper`. One-off templates (show, admin forms, static pages) → inline ERB в своей вьюхе.
 - **Stimulus for JS** — never add preline.js or any JS UI framework
 - **Slugs human-readable:** `/essays/rails-sqlite-production-2026`
 - **Never inline image variants** — warm via `ImageVariantJob` after upload

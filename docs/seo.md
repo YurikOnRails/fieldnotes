@@ -19,13 +19,9 @@ No external services. No JS trackers. Just standard web protocols done right.
 
 ---
 
-## Meta tags — ViewComponent
+## Meta tags
 
-```ruby
-# app/components/meta_tags_component.rb
-# Renders <title>, description, OG tags, JSON-LD in <head>
-# Every public controller sets @meta via a simple hash
-```
+`og:title`, `og:description`, `og:image`, `og:type`, `twitter:card`, canonical, JSON-LD — на каждой публичной странице через `app/views/shared/_meta_tags.html.erb` + `content_for(:head)`.
 
 ---
 

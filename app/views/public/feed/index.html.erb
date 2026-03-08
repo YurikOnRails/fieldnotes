@@ -1,0 +1,9 @@
+<h1>Fieldnotes</h1>
+<% @essays.each do |essay| %>
+  <article>
+    <h2><%= link_to essay.title, essay_path(slug: essay.slug) %></h2>
+    <% if essay.excerpt.present? %>
+      <p><%= essay.excerpt %></p>
+    <% end %>
+  </article>
+<% end %>

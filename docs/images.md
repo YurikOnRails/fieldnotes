@@ -22,26 +22,9 @@ Warmed by `ImageVariantJob` after upload. Never call `.variant()` inline in view
 
 ## picture tag (always use this, never plain image_tag for photos)
 
-```erb
-<picture>
-  <source
-    srcset="<%= url_for(photo.variant(format: :avif, resize_to_limit: [400, 300])) %> 400w,
-            <%= url_for(photo.variant(format: :avif, resize_to_limit: [800, 600])) %> 800w,
-            <%= url_for(photo.variant(format: :avif, resize_to_limit: [1600, 1200])) %> 1600w"
-    type="image/avif">
-  <source
-    srcset="<%= url_for(photo.variant(format: :webp, resize_to_limit: [400, 300])) %> 400w,
-            <%= url_for(photo.variant(format: :webp, resize_to_limit: [800, 600])) %> 800w,
-            <%= url_for(photo.variant(format: :webp, resize_to_limit: [1600, 1200])) %> 1600w"
-    type="image/webp">
-  <%= image_tag photo.variant(resize_to_limit: [800, 600]),
-      loading: "lazy",
-      sizes: "(max-width: 768px) 100vw, 50vw",
-      alt: item.caption %>
-</picture>
-```
+`ApplicationHelper#picture_tag(attachment, alt:, sizes: nil)` — единый способ рендерить фото. Никогда не вызывать `.variant()` инлайн во вьюхах.
 
-`loading="lazy"` everywhere except first visible hero image — use `loading="eager"` there.
+`loading="lazy"` везде, кроме первого hero-изображения — там `loading: "eager"`.
 
 ---
 
