@@ -31,7 +31,7 @@ Fieldnotes is a full Rails app — admin panel, rich text editor, image pipeline
 ## Quick start
 
 ```bash
-git clone https://github.com/YOUR_USER/fieldnotes.git
+git clone https://github.com/YurikOnRails/fieldnotes.git
 cd fieldnotes
 mise install      # Ruby 4.0.1
 bin/setup         # gems + database
