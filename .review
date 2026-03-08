@@ -1,0 +1,55 @@
+# Fieldnotes — Code Review
+#
+# Run after writing Ruby, ERB, or CSS code.
+# Focus: quality, duplication, simplicity for solo long-term maintenance.
+
+---
+
+## Code Quality & Simplicity
+
+- [ ] Can I understand this code in 6 months without context?
+- [ ] Methods under 15 lines, classes under 100 — split if larger
+- [ ] No dead code, no commented-out blocks, no TODO without a plan
+- [ ] Single responsibility — each method does one thing, each class has one reason to change
+- [ ] Naming says what it does — no abbreviations, no generic `data`/`result`/`item`
+- [ ] No premature abstractions — three similar lines are better than a clever helper used once
+
+---
+
+## Duplication
+
+- [ ] Is this logic already implemented elsewhere? Search before writing
+- [ ] Shared across 2+ places → extract to concern, service, or ViewComponent
+- [ ] Used once → leave inline, do not extract
+- [ ] Same query in multiple controllers → move to model scope
+- [ ] Same HTML pattern in multiple views → ViewComponent (not partial) if it has logic
+
+---
+
+## Rails Conventions
+
+- [ ] Rails 8 built-in over gem (Solid Queue, rate_limit, fresh_when, built-in auth)
+- [ ] `includes()` on collections — no N+1
+- [ ] `fresh_when @record` on public show/index
+- [ ] Public controllers fire `Rails.event.notify` for analytics
+- [ ] Admin inherits `Admin::BaseController`
+- [ ] Fat model, skinny controller — logic in models/services, not controllers
+- [ ] Callbacks only for data integrity, never for side effects (use jobs)
+
+---
+
+## ERB & CSS
+
+- [ ] Design tokens from `tokens.css` — no hardcoded colors/spacing/fonts
+- [ ] Stimulus for interactivity — no JS libraries
+- [ ] No `.variant()` inline in views — warm via `ImageVariantJob`
+- [ ] `<picture>` with AVIF/WebP/JPEG, not plain `image_tag` for photos
+
+---
+
+## Security & Privacy
+
+- [ ] No secrets in code
+- [ ] No external requests (CDN, fonts, scripts, trackers)
+- [ ] File uploads validated (type, size)
+- [ ] No Turbo Stream broadcasts to unauthenticated users
