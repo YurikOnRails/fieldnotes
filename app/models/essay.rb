@@ -5,6 +5,7 @@ class Essay < ApplicationRecord
   has_rich_text :content
   has_one_attached :cover
 
+
   STATUSES = %w[draft published].freeze
 
   validates :title, presence: true

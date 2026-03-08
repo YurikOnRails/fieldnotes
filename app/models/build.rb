@@ -4,6 +4,7 @@ class Build < ApplicationRecord
 
   has_one_attached :cover
 
+
   STATUSES = %w[active paused completed archived].freeze
   KINDS    = %w[business oss media community other].freeze
 
