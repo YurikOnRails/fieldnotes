@@ -1,0 +1,20 @@
+first_position:
+  title: First Build
+  slug: first-build
+  status: active
+  kind: oss
+  position: 1
+
+second_position:
+  title: Second Build
+  slug: second-build
+  status: active
+  kind: business
+  position: 2
+
+archived_build:
+  title: Archived Build
+  slug: archived-build
+  status: archived
+  kind: other
+  position: 3
