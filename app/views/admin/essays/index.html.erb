@@ -1,1 +1,5 @@
 <h1>Essays</h1>
+<%= link_to "New Essay", new_admin_essay_path %>
+<% @essays.each do |essay| %>
+  <p><%= link_to essay.title, admin_essay_path(essay) %> (<%= essay.status %>)</p>
+<% end %>

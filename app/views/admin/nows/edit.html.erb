@@ -1,0 +1,5 @@
+<h1>Now</h1>
+<%= form_with model: @now_entry, url: admin_now_path, method: :patch do |f| %>
+  <p><%= f.rich_text_area :body %></p>
+  <%= f.submit "Update" %>
+<% end %>

@@ -1,0 +1,5 @@
+<h1>Builds</h1>
+<%= link_to "New Build", new_admin_build_path %>
+<% @builds.each do |build| %>
+  <p><%= link_to build.title, admin_build_path(build) %> (<%= build.status %>)</p>
+<% end %>

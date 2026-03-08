@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Admin — Fieldnotes" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "lexxy", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <nav>
+      <%= link_to "Essays", admin_essays_path %> |
+      <%= link_to "Builds", admin_builds_path %> |
+      <%= link_to "Books", admin_books_path %> |
+      <%= link_to "Field", admin_field_index_path %> |
+      <%= link_to "Now", edit_admin_now_path %>
+      <span style="float:right"><%= button_to "Sign out", session_path, method: :delete %></span>
+    </nav>
+    <main>
+      <% if notice %><p><%= notice %></p><% end %>
+      <% if alert %><p><%= alert %></p><% end %>
+      <%= yield %>
+    </main>
+  </body>
+</html>
