@@ -1,3 +1,8 @@
+<% content_for :title, "Builds" %>
+<% content_for :head do %>
+  <%= meta_tags(title: "Builds", description: "Projects, businesses, and things I've built.") %>
+<% end %>
+
 <h1>Builds</h1>
 <% @builds.each do |build| %>
   <%= render "shared/build_card", build: build %>

@@ -1,5 +1,24 @@
-<h1>Field Series</h1>
-<%= link_to "New Series", new_admin_field_path %>
-<% @series.each do |s| %>
-  <p><%= link_to s.title, admin_field_path(s) %> (<%= s.kind %>)</p>
-<% end %>
+<div class="admin-toolbar">
+  <h1>Field Series</h1>
+  <%= link_to "New Series", new_admin_field_path, class: "btn btn--primary" %>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Title</th><th>Kind</th><th>Location</th><th>Date</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @series.each do |s| %>
+      <tr>
+        <td><%= link_to s.title, admin_field_path(s) %></td>
+        <td><%= s.kind %></td>
+        <td><%= s.location %></td>
+        <td><%= s.taken_on&.strftime("%b %d, %Y") %></td>
+        <td class="actions">
+          <%= link_to "Edit", edit_admin_field_path(s) %>
+          <%= button_to "Delete", admin_field_path(s), method: :delete, form: { data: { turbo_confirm: "Delete «#{s.title}»?" } }, class: "btn btn--danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

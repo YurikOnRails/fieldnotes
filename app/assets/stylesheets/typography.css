@@ -1,49 +1,25 @@
-/* Self-hosted fonts — place .woff2 files in app/assets/fonts/ */
+/* Self-hosted variable fonts */
 @font-face {
   font-family: 'Onest';
-  src: url('fonts/Onest-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Onest';
-  src: url('fonts/Onest-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Onest';
-  src: url('fonts/Onest-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Onest';
-  src: url('fonts/Onest-Bold.woff2') format('woff2');
-  font-weight: 700;
+  src: url('fonts/Onest-Variable.woff2') format('woff2');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
-  font-weight: 400;
+  src: url('fonts/JetBrainsMono-Variable.woff2') format('woff2');
+  font-weight: 100 800;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
+  src: url('fonts/JetBrainsMono-Italic-Variable.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: italic;
   font-display: swap;
 }
 

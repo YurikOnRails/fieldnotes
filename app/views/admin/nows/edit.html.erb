@@ -1,5 +1,8 @@
 <h1>Now</h1>
-<%= form_with model: @now_entry, url: admin_now_path, method: :patch do |f| %>
-  <p><%= f.rich_text_area :body %></p>
-  <%= f.submit "Update" %>
-<% end %>
+
+<div class="admin-card">
+  <%= form_with model: @now_entry, url: admin_now_path, method: :patch do |f| %>
+    <div class="field"><%= f.rich_text_area :body %></div>
+    <%= f.submit "Update", class: "btn btn--primary" %>
+  <% end %>
+</div>

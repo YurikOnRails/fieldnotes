@@ -1,14 +1,22 @@
 <%= form_with model: [:admin, build] do |f| %>
-  <% build.errors.each do |e| %><p><%= e.full_message %></p><% end %>
-  <p><%= f.label :title %><%= f.text_field :title %></p>
-  <p><%= f.label :slug %><%= f.text_field :slug %></p>
-  <p><%= f.label :description %><%= f.text_area :description %></p>
-  <p><%= f.label :url %><%= f.url_field :url %></p>
-  <p><%= f.label :icon_emoji %><%= f.text_field :icon_emoji %></p>
-  <p><%= f.label :status %><%= f.select :status, Build::STATUSES %></p>
-  <p><%= f.label :kind %><%= f.select :kind, Build::KINDS %></p>
-  <p><%= f.label :position %><%= f.number_field :position %></p>
-  <p><%= f.label :started_on %><%= f.date_field :started_on %></p>
-  <p><%= f.label :finished_on %><%= f.date_field :finished_on %></p>
-  <%= f.submit %>
+  <% if build.errors.any? %>
+    <div class="error-list">
+      <% build.errors.each do |e| %><p><%= e.full_message %></p><% end %>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="field"><%= f.label :title %><%= f.text_field :title %></div>
+    <div class="field"><%= f.label :slug %><%= f.text_field :slug %></div>
+    <div class="field"><%= f.label :description %><%= f.text_area :description, rows: 3 %></div>
+    <div class="field"><%= f.label :url %><%= f.url_field :url %></div>
+    <div class="field"><%= f.label :icon_emoji %><%= f.text_field :icon_emoji %></div>
+    <div class="field"><%= f.label :status %><%= f.select :status, Build::STATUSES %></div>
+    <div class="field"><%= f.label :kind %><%= f.select :kind, Build::KINDS %></div>
+    <div class="field"><%= f.label :position %><%= f.number_field :position %></div>
+    <div class="field"><%= f.label :started_on %><%= f.date_field :started_on %></div>
+    <div class="field"><%= f.label :finished_on %><%= f.date_field :finished_on %></div>
+  </div>
+
+  <%= f.submit class: "btn btn--primary" %>
 <% end %>

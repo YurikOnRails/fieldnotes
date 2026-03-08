@@ -1,11 +1,19 @@
 <%= form_with model: [:admin, book] do |f| %>
-  <% book.errors.each do |e| %><p><%= e.full_message %></p><% end %>
-  <p><%= f.label :title %><%= f.text_field :title %></p>
-  <p><%= f.label :author %><%= f.text_field :author %></p>
-  <p><%= f.label :cover_url %><%= f.url_field :cover_url %></p>
-  <p><%= f.label :year_read %><%= f.number_field :year_read %></p>
-  <p><%= f.label :rating %><%= f.number_field :rating, min: 1, max: 5 %></p>
-  <p><%= f.label :status %><%= f.select :status, Book::STATUSES %></p>
-  <p><%= f.label :key_idea %><%= f.text_area :key_idea %></p>
-  <%= f.submit %>
+  <% if book.errors.any? %>
+    <div class="error-list">
+      <% book.errors.each do |e| %><p><%= e.full_message %></p><% end %>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="field"><%= f.label :title %><%= f.text_field :title %></div>
+    <div class="field"><%= f.label :author %><%= f.text_field :author %></div>
+    <div class="field"><%= f.label :cover_url %><%= f.url_field :cover_url %></div>
+    <div class="field"><%= f.label :year_read %><%= f.number_field :year_read %></div>
+    <div class="field"><%= f.label :rating %><%= f.number_field :rating, min: 1, max: 5 %></div>
+    <div class="field"><%= f.label :status %><%= f.select :status, Book::STATUSES %></div>
+    <div class="field"><%= f.label :key_idea %><%= f.text_area :key_idea, rows: 4 %></div>
+  </div>
+
+  <%= f.submit class: "btn btn--primary" %>
 <% end %>

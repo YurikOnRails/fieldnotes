@@ -1,3 +1,8 @@
+<% content_for :title, "Reading" %>
+<% content_for :head do %>
+  <%= meta_tags(title: "Reading", description: "Books I've read and key ideas from each.") %>
+<% end %>
+
 <h1>Reading</h1>
 <% @books.each do |book| %>
   <%= render "shared/book_row", book: book %>

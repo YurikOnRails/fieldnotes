@@ -1,5 +1,23 @@
-<h1>Builds</h1>
-<%= link_to "New Build", new_admin_build_path %>
-<% @builds.each do |build| %>
-  <p><%= link_to build.title, admin_build_path(build) %> (<%= build.status %>)</p>
-<% end %>
+<div class="admin-toolbar">
+  <h1>Builds</h1>
+  <%= link_to "New Build", new_admin_build_path, class: "btn btn--primary" %>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Title</th><th>Kind</th><th>Status</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @builds.each do |build| %>
+      <tr>
+        <td><%= link_to build.title, admin_build_path(build) %></td>
+        <td><%= build.kind %></td>
+        <td><span class="badge badge--<%= build.status %>"><%= build.status %></span></td>
+        <td class="actions">
+          <%= link_to "Edit", edit_admin_build_path(build) %>
+          <%= button_to "Delete", admin_build_path(build), method: :delete, form: { data: { turbo_confirm: "Delete «#{build.title}»?" } }, class: "btn btn--danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

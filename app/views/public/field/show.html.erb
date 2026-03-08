@@ -1,3 +1,11 @@
+<% content_for :title, @series.title %>
+<% content_for :head do %>
+  <%= meta_tags(
+    title:       @series.title,
+    description: @series.description.presence || @series.title
+  ) %>
+<% end %>
+
 <h1><%= @series.title %></h1>
 <% if @series.description.present? %>
   <p><%= @series.description %></p>

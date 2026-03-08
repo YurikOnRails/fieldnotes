@@ -1,3 +1,8 @@
+<% content_for :title, "Essays" %>
+<% content_for :head do %>
+  <%= meta_tags(title: "Essays", description: "Writing on software, technology, and building things.") %>
+<% end %>
+
 <h1>Essays</h1>
 <% @essays.each do |essay| %>
   <%= render "shared/essay_card", essay: essay %>

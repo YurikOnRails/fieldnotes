@@ -1,10 +1,18 @@
 <%= form_with model: [:admin, series], url: series.new_record? ? admin_field_index_path : admin_field_path(series) do |f| %>
-  <% series.errors.each do |e| %><p><%= e.full_message %></p><% end %>
-  <p><%= f.label :title %><%= f.text_field :title %></p>
-  <p><%= f.label :slug %><%= f.text_field :slug %></p>
-  <p><%= f.label :description %><%= f.text_area :description %></p>
-  <p><%= f.label :kind %><%= f.select :kind, FieldSeries::KINDS %></p>
-  <p><%= f.label :location %><%= f.text_field :location %></p>
-  <p><%= f.label :taken_on %><%= f.date_field :taken_on %></p>
-  <%= f.submit %>
+  <% if series.errors.any? %>
+    <div class="error-list">
+      <% series.errors.each do |e| %><p><%= e.full_message %></p><% end %>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="field"><%= f.label :title %><%= f.text_field :title %></div>
+    <div class="field"><%= f.label :slug %><%= f.text_field :slug %></div>
+    <div class="field"><%= f.label :description %><%= f.text_area :description, rows: 3 %></div>
+    <div class="field"><%= f.label :kind %><%= f.select :kind, FieldSeries::KINDS %></div>
+    <div class="field"><%= f.label :location %><%= f.text_field :location %></div>
+    <div class="field"><%= f.label :taken_on %><%= f.date_field :taken_on %></div>
+  </div>
+
+  <%= f.submit class: "btn btn--primary" %>
 <% end %>

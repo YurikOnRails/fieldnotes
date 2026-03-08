@@ -1,12 +1,23 @@
 <%= form_with model: [:admin, essay] do |f| %>
-  <% essay.errors.each do |e| %><p><%= e.full_message %></p><% end %>
-  <p><%= f.label :title %><%= f.text_field :title %></p>
-  <p><%= f.label :slug %><%= f.text_field :slug %></p>
-  <p><%= f.label :excerpt %><%= f.text_area :excerpt %></p>
-  <p><%= f.label :status %><%= f.select :status, Essay::STATUSES %></p>
-  <p><%= f.label :published_at %><%= f.datetime_local_field :published_at %></p>
-  <p><%= f.label :location_name %><%= f.text_field :location_name %></p>
-  <p><%= f.label :content %><%= f.rich_text_area :content %></p>
-  <p><%= f.label :cover %><%= f.file_field :cover %></p>
-  <%= f.submit %>
+  <% if essay.errors.any? %>
+    <div class="error-list">
+      <% essay.errors.each do |e| %><p><%= e.full_message %></p><% end %>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="field"><%= f.label :title %><%= f.text_field :title %></div>
+    <div class="field"><%= f.label :slug %><%= f.text_field :slug %></div>
+    <div class="field"><%= f.label :excerpt %><%= f.text_area :excerpt, rows: 3 %></div>
+    <div class="field"><%= f.label :status %><%= f.select :status, Essay::STATUSES %></div>
+    <div class="field"><%= f.label :published_at %><%= f.datetime_local_field :published_at %></div>
+    <div class="field"><%= f.label :location_name %><%= f.text_field :location_name %></div>
+    <div class="field"><%= f.label :cover %><%= f.file_field :cover %></div>
+  </div>
+
+  <div class="admin-card">
+    <div class="field"><%= f.label :content %><%= f.rich_text_area :content %></div>
+  </div>
+
+  <%= f.submit class: "btn btn--primary" %>
 <% end %>

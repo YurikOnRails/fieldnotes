@@ -9,6 +9,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <% unless content_for?(:head) %>
+      <%= meta_tags(title: "Fieldnotes", description: "Writing on software, technology, and building things.") %>
+    <% end %>
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
