@@ -2,19 +2,17 @@
 
 **The Rails 8 reference app for personal sites.**
 
-A production-ready digital garden and personal site — essays, projects, books, photography, and a /now page.
 Fork it, deploy to a $4/mo VPS in 15 minutes, make it yours.
+Digital garden: essays, projects, books, photography, /now page.
 
-Built on Rails 8.1 + Ruby 4 + SQLite. No Redis, no PaaS, no external JS frameworks.
+Built on Rails 8.1 + Ruby 4 + SQLite. No Redis, no PaaS, no JS frameworks.
 One server, one deploy command, full ownership of your data. MIT license.
 
-**Why not Jekyll/Hugo/Next.js?** This is a full Rails app — admin panel, rich text editor,
-image pipeline, background jobs, real-time updates, self-hosted analytics. All the things
-static generators can't do, without the complexity of a JS stack.
+**Why not Jekyll/Hugo/Next.js?** Full Rails app — admin panel, rich text editor,
+image pipeline, background jobs, real-time updates, self-hosted analytics.
+All the things static generators can't do, without the complexity of a JS stack.
 
-**Mission:** Demonstrate that Rails 8 is the best full-stack framework for indie developers.
-Promote ideas publicly, attract talented people, build personal brand.
-**Future:** `/contact` → sponsorship + collaboration ("Support / Collaborate" button in v2+).
+**Mission:** Demonstrate Rails 8 superiority for indie developers. Build personal brand.
 
 ---
 
@@ -25,112 +23,47 @@ Promote ideas publicly, attract talented people, build personal brand.
 | Ruby | 4.0.1 (PRISM parser, YJIT in production) |
 | Rails | 8.1.2 |
 | Database | SQLite via Litestack |
-| Background jobs | Solid Queue |
-| Cache | Solid Cache |
-| WebSockets | Solid Cable |
-| Asset pipeline | Propshaft |
-| JavaScript | Importmaps + Stimulus |
+| Jobs / Cache / WS | Solid Queue · Solid Cache · Solid Cable |
+| Assets | Propshaft · Importmaps · Stimulus |
 | Views | ERB + ViewComponent |
-| Rich text | Action Text + **Lexxy** (beta, replaces Trix — do NOT use Trix) |
-| File storage | Active Storage + libvips → AVIF/WebP variants |
-| Authentication | Rails built-in authentication generator |
-| Deployment | Kamal 2 |
-| Version management | mise (ruby@4.0.1 in .mise.toml) |
+| Rich text | Action Text + **Lexxy** (beta — do NOT use Trix) |
+| Images | Active Storage + libvips → AVIF/WebP |
+| Auth | Rails built-in authentication generator |
+| Deploy | Kamal 2 |
 
-**Lexxy:** Next-gen editor from 37signals built on Meta's Lexical. GitHub: https://github.com/basecamp/lexxy.
-Still beta — check GitHub for current installation instructions before implementing.
+**Lexxy:** 37signals editor on Meta's Lexical. GitHub: https://github.com/basecamp/lexxy
+Check GitHub for current install instructions before implementing.
 
-**CSS:** No framework. Custom CSS with design tokens (`app/assets/stylesheets/tokens.css`).
-No Preline, no Tailwind, no Pico — the visual identity is hand-crafted and intentional.
-All interactivity via Stimulus controllers.
-
----
-
-## Homepage Layout
-
-```
-┌─────────────────────────────────────────────┐
-│  HERO: wide portrait photo + name + tagline  │
-│  (who I am, 2-3 sentences, personal voice)  │
-├─────────────────────────────────────────────┤
-│  Big tiles grid: Essays · Projects ·        │
-│  Reading · Craft · Now                      │
-├─────────────────────────────────────────────┤
-│  Recent: latest essay + latest project      │
-└─────────────────────────────────────────────┘
-```
-
-Animations — subtle, CSS-first:
-- Fade-in on scroll via `IntersectionObserver` in Stimulus (`reveal_controller.js`)
-- Hover on tiles: `scale(1.02)` + shadow — pure CSS, no JS
-- Typewriter effect in hero tagline — one line, `typewriter_controller.js`
-- No parallax, no animation libraries (GSAP etc.), no spinning elements
+**CSS:** Custom CSS + design tokens (`app/assets/stylesheets/tokens.css`).
+No Tailwind, no Preline, no Pico. All interactivity via Stimulus.
 
 ---
 
 ## Data Models
 
 ```ruby
-essays:       id, title, slug, excerpt, status(draft/published), published_at,
+essays:       title, slug, excerpt, status(draft/published), published_at,
               latitude, longitude, location_name
               has_rich_text :content   # Lexxy
               has_one_attached :cover
 
-projects:     id, title, slug, description,
-              status(active/paused/completed/abandoned),
+projects:     title, slug, description, status(active/paused/completed/abandoned),
               url, repo_url, stack_tags, started_on, finished_on
               has_one_attached :cover
 
-books:        id, title, author, cover_url, year_read, rating(1-5),
+books:        title, author, cover_url, year_read, rating(1-5),
               key_idea(text), status(reading/completed/abandoned)
 
-craft_series: id, title, slug, description,
-              kind(photo/video/mixed), location, taken_on,
-              latitude, longitude
+craft_series: title, slug, description, kind(photo/video/mixed),
+              location, taken_on, latitude, longitude
 
-craft_items:  id, craft_series_id, kind(photo/video), caption,
-              position, youtube_url
+craft_items:  craft_series_id, kind(photo/video), caption, position, youtube_url
               has_one_attached :photo
 
-now_entries:  id, body(rich text), published_at
-              has_paper_trail
+now_entries:  body(rich text), published_at — has_paper_trail
 
-tags:         id, name, slug
-taggings:     id, tag_id, taggable_id, taggable_type  # polymorphic
-
-page_views:   id, event, payload(json), created_at    # analytics
-```
-
----
-
-## Application Structure
-
-```
-app/
-├── controllers/
-│   ├── public/        # essays, projects, books, craft, now, feed
-│   └── admin/         # custom admin — no ActiveAdmin
-├── models/
-├── views/
-│   ├── components/    # ViewComponent: essay_card, book_card, project_card,
-│   │                  #   craft_series_card, photo_gallery, youtube_embed
-│   ├── layouts/       # application.html.erb, admin.html.erb
-│   ├── public/
-│   └── admin/
-├── jobs/
-│   ├── image_variant_job.rb   # warm AVIF/WebP variants after upload
-│   └── export_job.rb          # full data export to ZIP (ActiveJob::Continuable)
-├── services/
-│   └── open_library_service.rb  # ISBN → book metadata + cover URL
-└── javascript/controllers/
-    ├── reveal_controller.js       # fade-in on scroll
-    ├── typewriter_controller.js   # hero tagline animation
-    ├── gallery_controller.js
-    ├── youtube_controller.js      # facade pattern — lazy load, youtube-nocookie.com
-    ├── autosave_controller.js
-    ├── mobile_menu_controller.js
-    ├── dropdown_controller.js
-    └── clipboard_controller.js
+tags/taggings: polymorphic (tag_id, taggable_id, taggable_type)
+page_views:    event(string), payload(json), created_at
 ```
 
 ---
@@ -141,15 +74,18 @@ app/
 root "public/feed#index"
 
 scope module: :public do
-  resources :essays,   only: [:index, :show], param: :slug
-  resources :projects, only: [:index, :show], param: :slug
+  resources :essays,   only: [:index, :show], param: :slug  # .rss + .md on show
+  resources :projects, only: [:index, :show], param: :slug  # .rss on index
   resources :books,    only: [:index]
   resources :craft,    only: [:index, :show], param: :slug
   get "/now",     to: "now#show"
+  get "/feed",    to: "feed#index"    # .rss — unified feed
   get "/contact", to: "pages#contact"
   get "/about",   to: "pages#about"
   get "/uses",    to: "pages#uses"
 end
+
+get "/sitemap.xml", to: "sitemap#index", defaults: { format: :xml }
 
 namespace :admin do
   root "essays#index"
@@ -159,147 +95,29 @@ namespace :admin do
   end
   resource :now, only: [:edit, :update]
 end
-
 ```
 
----
-
-## Navigation
-
-```
-Essays | Projects | Reading | Craft | Now
-```
-
-Footer only: /about · /uses · /contact · GitHub · RSS
+Nav: `Essays | Projects | Reading | Craft | Now`
+Footer: /about · /uses · /contact · GitHub · RSS (`/feed.rss`)
 
 ---
 
 ## Coding Conventions
 
 - **Ruby 4.0 features welcome:** `it` block parameter, PRISM parser
-- **ViewComponent over partials** for any reusable UI element
+- **ViewComponent over partials** for reusable UI
 - **Stimulus for JS** — never add preline.js or any JS UI framework
 - **Slugs human-readable:** `/essays/rails-sqlite-production-2026`
 - `paper_trail` on `NowEntry` for public revision history
-- **Never inline image variants** — always warm via `ImageVariantJob` after upload
-- No videos stored locally — YouTube facade pattern (`youtube-nocookie.com`)
-- YJIT: `config.yjit = true` in `production.rb`
+- **Never inline image variants** — warm via `ImageVariantJob` after upload
+- No videos stored locally — YouTube facade (`youtube-nocookie.com`)
 - No ActiveAdmin — custom controllers under `Admin::BaseController`
 - No GitHub API — project stats not displayed
+- Prefer Rails 8 built-ins over gems (see `docs/rails8-features.md`)
 
 ---
 
-## Rails 8 / 8.1 — Use Built-in Features First
-
-Always prefer Rails 8/8.1 built-ins over gems. See [`docs/rails8-features.md`](docs/rails8-features.md) for code examples.
-
-| Feature | Use case |
-|---|---|
-| `ActiveJob::Continuable` | `ExportJob` — resume on container restart |
-| `config/ci.rb` + `bin/ci` | Local CI, no external service needed |
-| `format.md` response | Essays expose `/essays/:slug.md` for RSS readers / AI agents |
-| `Rails.event.notify` | Self-hosted analytics → `page_views` table, zero JS trackers |
-| `rate_limit` | RSS feed, `/essays` index, `/essays.md` — 60 req/min |
-| `config.yjit = true` | Production performance, ~15-20% boost |
-| `fresh_when` | HTTP caching on every public action (ETag + Last-Modified) |
-
----
-
-## Analytics (Rails.event.notify — in v1)
-
-```ruby
-# In every public controller action:
-Rails.event.notify("essay.viewed", essay_id: @essay.id, slug: @essay.slug)
-
-# Subscriber in config/initializers/analytics.rb writes to page_views table
-```
-
-Zero external services. Zero JS. Pure Rails 8.1 + SQLite.
-
----
-
-## Performance Rules
-
-- `fresh_when @record` on every public `show` and `index` action
-- `includes` always when rendering collections — never lazy-load associations in views
-- `bullet` gem in development — raises on N+1
-- Solid Cache TTL: book metadata 7d · essay fragment 1h · now page 10min · RSS 30min
-- AVIF → WebP → JPEG pipeline via `<picture>` tag. See [`docs/images.md`](docs/images.md)
-- Open Library API results cached 7 days. See [`docs/open-library.md`](docs/open-library.md)
-
----
-
-## Turbo Conventions
-
-| Situation | Use |
-|---|---|
-| Admin form save | `redirect_to` |
-| Validation error | `render :new/edit, status: :unprocessable_entity` |
-| Delete from list | Turbo Stream → remove card |
-| Autosave draft | Stimulus `autosave_controller` → PATCH → 204 |
-| Export progress | Turbo Stream broadcast from `ExportJob` |
-| Flash after redirect | Turbo Stream → `#flash` target |
-| Lazy-load section | Turbo Frame with `src` |
-| Menu / modal / dropdown | Stimulus only — no Turbo |
-
-Never broadcast Turbo Streams to unauthenticated users.
-
----
-
-## Design Principles
-
-Reference aesthetic: Basecamp — warm, human, content-first. Not corporate, not a template.
-
-### Typography — self-hosted, no Google Fonts (privacy)
-
-Fonts live in `app/assets/fonts/`. No CDN requests, no third-party tracking.
-
-| Role | Font | Weights |
-|---|---|---|
-| Body + UI | **Onest** (supports Cyrillic + Latin) | 400, 500, 600, 700 |
-| Code blocks | **JetBrains Mono** | 400, 500 |
-
-`font-display: swap` on all `@font-face` declarations. Only `.woff2` — no other formats needed.
-
-### Design Tokens (`app/assets/stylesheets/tokens.css`)
-
-```css
-:root {
-  --color-bg:           #FAF9F7;
-  --color-surface:      #FFFFFF;
-  --color-border:       #E8E3DC;
-  --color-text:         #1C1917;
-  --color-muted:        #78716C;
-  --color-accent:       #2D6A4F;
-  --color-accent-hover: #235A42;
-
-  --font-sans:   'Onest', system-ui, sans-serif;
-  --font-mono:   'JetBrains Mono', monospace;
-  --text-base:   1.125rem;
-  --leading:     1.7;
-
-  --radius-card: 14px;
-  --radius-btn:  999px;
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 8px rgba(0,0,0,0.10), 0 12px 24px rgba(0,0,0,0.07);
-}
-```
-
-### Rules
-
-- Background `#FAF9F7`, cards `#FFFFFF` — warm contrast, not harsh white-on-white
-- Navigation: emoji + text label (`✍️ Essays`) — human, zero icon dependencies
-- Card hover: `translateY(-2px)` + `--shadow-hover` — pure CSS, no JS
-- Body text: 18–21px, 60–75 chars/line, mobile-first
-- Buttons: pill shape (`border-radius: 999px`), accent fill for CTA
-- Icons: Unicode emoji for nav · [Phosphor Icons](https://phosphoricons.com/) SVG sprite for UI chrome (MIT, multi-weight: use `light` for decorative, `bold` for functional). Self-hosted, no CDN.
-- Personal voice in every line — not corporate language
-- F-pattern: key words first in every heading
-- No dark mode in v1
-
----
-
-## Testing (TDD)
+## Testing
 
 Write tests before implementation. No PR without tests.
 
@@ -313,29 +131,32 @@ Write tests before implementation. No PR without tests.
 
 ## NOT in v1
 
-- Comments
-- Search
-- Dark mode
-- Sponsorship / payment integration (v2+)
-- Live activity sidebar on homepage (v2, when content accumulates)
-- `/pulse` real-time dashboard (v2) — see [`docs/pulse.md`](docs/pulse.md)
-- `/map` travel map (v3) — coordinate fields added to models now for data accumulation
-- Web Push notifications (removed — too early without subscribers)
-- Multi-user support
+- Comments, search, dark mode
+- Sponsorship / payments (v2+)
+- `/pulse` real-time dashboard (v2) — see `docs/pulse.md`
+- `/map` travel map (v3) — coordinate fields added now for data accumulation
+- Web Push, multi-user, newsletter/email subscriptions
+- Bidirectional links / graph view (reconsider at 200+ essays)
+- AI-generated summaries / chatbot (contradicts personal voice)
+- Webmentions, WebSub — not worth the complexity
 - preline.js or any JS UI library
 
 ---
 
-## Deployment
+## Detailed docs (read when working on specific areas)
 
-```yaml
-# config/deploy.yml (Kamal 2)
-volumes:
-  - fieldnotes_storage:/rails/storage   # Active Storage
-  - fieldnotes_db:/rails/db             # SQLite
-```
-
-Hetzner CX22 ($4/mo, 40GB). Storage: ~10,000 photos at 535KB/photo.
+| Topic | File |
+|---|---|
+| Local setup, first user, env vars | [`docs/getting-started.md`](docs/getting-started.md) |
+| Kamal, VPS, SSL, backups | [`docs/deployment.md`](docs/deployment.md) |
+| Design tokens, typography, layout, homepage | [`docs/design.md`](docs/design.md) |
+| SEO, JSON-LD, OG tags, RSS, analytics, Turbo, performance | [`docs/seo.md`](docs/seo.md) |
+| Image pipeline, variants, watermark, picture tag | [`docs/images.md`](docs/images.md) |
+| Rails 8 feature code examples | [`docs/rails8-features.md`](docs/rails8-features.md) |
+| Data export (ZIP) | [`docs/export.md`](docs/export.md) |
+| Open Library API | [`docs/open-library.md`](docs/open-library.md) |
+| PWA manifest + service worker | [`docs/pwa.md`](docs/pwa.md) |
+| /pulse real-time dashboard (v2) | [`docs/pulse.md`](docs/pulse.md) |
 
 ---
 
