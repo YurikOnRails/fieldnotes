@@ -1,5 +1,6 @@
 class Build < ApplicationRecord
   include Sluggable
+  include Taggable
 
   has_one_attached :cover
 

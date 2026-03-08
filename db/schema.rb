@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_08_130137) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_08_130759) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -122,6 +122,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_130137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "page_views", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "event"
+    t.json "payload"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -129,6 +136,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_130137) do
     t.string "user_agent"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "tag_id", null: false
+    t.integer "taggable_id", null: false
+    t.string "taggable_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -143,4 +167,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_130137) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "field_items", "field_series"
   add_foreign_key "sessions", "users"
+  add_foreign_key "taggings", "tags"
 end

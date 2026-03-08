@@ -1,5 +1,6 @@
 class Essay < ApplicationRecord
   include Sluggable
+  include Taggable
 
   has_rich_text :content
   has_one_attached :cover

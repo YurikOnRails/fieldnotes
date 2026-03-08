@@ -1,5 +1,6 @@
 class FieldSeries < ApplicationRecord
   include Sluggable
+  include Taggable
 
   KINDS = %w[photo video mixed].freeze
 
