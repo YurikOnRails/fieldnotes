@@ -1,4 +1,5 @@
 require "test_helper"
+require "net/http"
 
 class OpenLibraryServiceTest < ActiveSupport::TestCase
   VALID_ISBN   = "9780134757599"

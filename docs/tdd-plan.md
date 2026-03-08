@@ -22,7 +22,7 @@
 5. Controllers — Admin (CRUD)
 6. Controllers — Public (read-only + RSS/MD)
 7. ERB partials + helpers (meta tags, cards, picture_tag)
-8. System tests (critical user flows)
+8. ~~System tests~~ — не используем (контроллерные тесты достаточны)
 ```
 
 ---
@@ -840,83 +840,9 @@ end
 
 ---
 
-## Этап 16: System tests — критические пользовательские потоки
+## Этап 16: ~~System tests~~ — пропущен
 
-**Что делаем:** end-to-end тесты через Capybara + Selenium.
-
-**Red:**
-
-```ruby
-# test/system/admin/essay_management_test.rb
-class Admin::EssayManagementTest < ApplicationSystemTestCase
-  setup do
-    sign_in_as users(:admin)
-  end
-
-  test "admin creates and publishes an essay" do
-    visit admin_essays_url
-    click_on "New Essay"
-
-    fill_in "Title", with: "My New Essay"
-    fill_in "Slug", with: "my-new-essay"
-    select "draft", from: "Status"
-    click_on "Save"
-
-    assert_text "Essay created"
-
-    # Publish
-    click_on "Edit"
-    select "published", from: "Status"
-    click_on "Save"
-
-    assert_text "published"
-
-    # Verify public visibility
-    visit essay_url(slug: "my-new-essay")
-    assert_text "My New Essay"
-  end
-
-  test "admin deletes an essay" do
-    visit admin_essays_url
-    essay_title = essays(:draft).title
-
-    accept_confirm { click_on "Delete", match: :first }
-    assert_no_text essay_title
-  end
-end
-
-# test/system/public/reading_essay_test.rb
-class Public::ReadingEssayTest < ApplicationSystemTestCase
-  test "visitor reads a published essay" do
-    essay = essays(:published_new)
-    visit essays_url
-
-    click_on essay.title
-    assert_text essay.title
-    assert_current_path essay_path(slug: essay.slug)
-  end
-
-  test "visitor cannot see draft essays" do
-    visit essays_url
-    assert_no_text essays(:draft).title
-  end
-end
-
-# test/system/public/now_page_test.rb
-class Public::NowPageTest < ApplicationSystemTestCase
-  test "visitor sees current now entry and previous entries" do
-    visit now_url
-    assert_text "Now"
-    assert_selector ".previous-entries"
-  end
-end
-```
-
-**Green:**
-- Все предыдущие этапы должны быть реализованы
-- Admin views с формами
-- Public views с разметкой
-- Навигация: `Essays | Builds | Reading | Field | Now`
+Capybara + Selenium убраны из проекта. Контроллерные тесты (ActionDispatch::IntegrationTest) покрывают все критические flows: CRUD, авторизацию, коды ответов, редиректы. Для личного сайта без сложных JS-взаимодействий этого достаточно.
 
 ---
 
@@ -1011,7 +937,7 @@ end
 | 13 | Public controllers | controller | 7 controllers + views |
 | 14 | Sitemap + RSS | controller | controller + XML/RSS views |
 | 15 | ERB partials + helpers | helper | meta_tags, cards, picture_tag |
-| 16 | System tests | system | end-to-end flows |
+| 16 | ~~System tests~~ | — | убраны, Capybara не используем |
 | 17 | Design tokens | system | CSS + fonts + layout |
 | 18 | PWA + finish | integration | PWA + seeds + llms.txt |
 
