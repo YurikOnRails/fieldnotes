@@ -1,0 +1,11 @@
+iceland:
+  title: Iceland 2026
+  slug: iceland-2026
+  kind: photo
+  location: Reykjavik, Iceland
+
+norway:
+  title: Norway 2025
+  slug: norway-2025
+  kind: mixed
+  location: Bergen, Norway

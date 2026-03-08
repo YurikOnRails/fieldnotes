@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_08_125817) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_08_130137) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -91,6 +91,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_125817) do
     t.index ["slug"], name: "index_essays_on_slug", unique: true
   end
 
+  create_table "field_items", force: :cascade do |t|
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.integer "field_series_id", null: false
+    t.string "kind"
+    t.integer "position"
+    t.datetime "updated_at", null: false
+    t.string "youtube_url"
+    t.index ["field_series_id"], name: "index_field_items_on_field_series_id"
+  end
+
+  create_table "field_series", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "kind"
+    t.decimal "latitude"
+    t.string "location"
+    t.decimal "longitude"
+    t.string "slug"
+    t.date "taken_on"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_field_series_on_slug", unique: true
+  end
+
   create_table "now_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "published_at"
@@ -116,5 +141,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_125817) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "field_items", "field_series"
   add_foreign_key "sessions", "users"
 end

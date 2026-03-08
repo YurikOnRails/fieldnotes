@@ -1,0 +1,18 @@
+photo_one:
+  field_series: iceland
+  kind: photo
+  caption: Hallgrímskirkja at dawn
+  position: 1
+
+photo_two:
+  field_series: iceland
+  kind: photo
+  caption: Black sand beach
+  position: 2
+
+video_one:
+  field_series: norway
+  kind: video
+  caption: Bergen timelapse
+  position: 1
+  youtube_url: https://www.youtube-nocookie.com/embed/abc123
