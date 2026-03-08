@@ -1,0 +1,7 @@
+<article>
+  <h2><%= link_to series.title, field_path(slug: series.slug) %></h2>
+  <% if series.description.present? %>
+    <p><%= series.description %></p>
+  <% end %>
+  <span><%= series.kind %></span>
+</article>

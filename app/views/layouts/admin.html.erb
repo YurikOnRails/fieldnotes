@@ -19,8 +19,7 @@
       <span style="float:right"><%= button_to "Sign out", session_path, method: :delete %></span>
     </nav>
     <main>
-      <% if notice %><p><%= notice %></p><% end %>
-      <% if alert %><p><%= alert %></p><% end %>
+      <%= render "shared/flash" %>
       <%= yield %>
     </main>
   </body>

@@ -1,0 +1,7 @@
+<article>
+  <h2><%= book.title %></h2>
+  <p><%= book.author %></p>
+  <% if book.key_idea.present? %>
+    <p><%= book.key_idea %></p>
+  <% end %>
+</article>

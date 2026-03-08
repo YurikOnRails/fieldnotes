@@ -1,10 +1,4 @@
 <h1>Reading</h1>
 <% @books.each do |book| %>
-  <article>
-    <h2><%= book.title %></h2>
-    <p><%= book.author %></p>
-    <% if book.key_idea.present? %>
-      <p><%= book.key_idea %></p>
-    <% end %>
-  </article>
+  <%= render "shared/book_row", book: book %>
 <% end %>

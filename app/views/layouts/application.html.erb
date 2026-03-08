@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Fieldnotes" %></title>
+    <title><%= content_for(:title).present? ? "#{content_for(:title)} — Fieldnotes" : "Fieldnotes" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Fieldnotes">
@@ -25,6 +25,7 @@
   </head>
 
   <body>
+    <%= render "shared/flash" %>
     <%= yield %>
   </body>
 </html>
