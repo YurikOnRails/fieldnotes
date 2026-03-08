@@ -33,20 +33,49 @@ All the things static generators can't do, without the complexity of a JS stack.
 
 **Lexxy:** 37signals editor on Meta's Lexical. GitHub: https://github.com/basecamp/lexxy
 Check GitHub for current install instructions before implementing.
+We actively test and contribute fixes to Lexxy. If Lexxy breaks after update —
+pin the last working version in Gemfile, open an issue upstream, fix and PR.
 
 **CSS:** Custom CSS + design tokens (`app/assets/stylesheets/tokens.css`).
 No Tailwind, no Preline, no Pico. All interactivity via Stimulus.
 
 ---
 
+## Content Modules
+
+Fieldnotes is modular. Essays and /now are core. Everything else is optional —
+disable by removing routes, nav link, and admin controllers. No dead code left behind.
+
+| Module | Core? | Purpose |
+|---|---|---|
+| **Essays** | yes | Long-form writing — the heart of the site |
+| **Now** | yes | What you're doing right now (nownownow.com tradition) |
+| **Projects** | optional | Portfolio of work — active, paused, completed |
+| **Books** | optional | Public reading log — motivates reading, shares key ideas |
+| **Craft** | optional | Photo/video series — for makers with a camera |
+
+**Books** — not a Goodreads clone. The point is one sentence: `key_idea`. What did you
+take away from this book? This motivates reading with intent and sharing insights publicly.
+Covers fetched via Open Library API (free, no key) — see `docs/open-library.md`.
+
+**Craft** — first-class photo/video content, not an afterthought image gallery.
+Series with captions, positions, YouTube facade, AVIF/WebP pipeline, watermarks.
+If you don't shoot photos — remove it, the app works fine without it.
+
+---
+
 ## Data Models
 
 ```ruby
+# CORE
 essays:       title, slug, excerpt, status(draft/published), published_at,
               latitude, longitude, location_name
               has_rich_text :content   # Lexxy
               has_one_attached :cover
 
+now_entries:  body(rich text), published_at — has_paper_trail
+
+# OPTIONAL
 projects:     title, slug, description, status(active/paused/completed/abandoned),
               url, repo_url, stack_tags, started_on, finished_on
               has_one_attached :cover
@@ -60,8 +89,7 @@ craft_series: title, slug, description, kind(photo/video/mixed),
 craft_items:  craft_series_id, kind(photo/video), caption, position, youtube_url
               has_one_attached :photo
 
-now_entries:  body(rich text), published_at — has_paper_trail
-
+# SYSTEM
 tags/taggings: polymorphic (tag_id, taggable_id, taggable_type)
 page_views:    event(string), payload(json), created_at
 ```
@@ -157,6 +185,16 @@ Write tests before implementation. No PR without tests.
 | Open Library API | [`docs/open-library.md`](docs/open-library.md) |
 | PWA manifest + service worker | [`docs/pwa.md`](docs/pwa.md) |
 | /pulse real-time dashboard (v2) | [`docs/pulse.md`](docs/pulse.md) |
+
+---
+
+## Contributing
+
+Fieldnotes is open source. Contributions welcome — especially from people using it for their own sites.
+
+- `CONTRIBUTING.md` — how to set up, code style, PR process
+- Issues tagged `good first issue` — entrЯ y points for new contributors
+- Bug reports and Lexxy compatibility fixes are especially valuable
 
 ---
 

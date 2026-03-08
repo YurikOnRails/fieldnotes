@@ -111,6 +111,20 @@ Admin panel: http://localhost:3000/admin
 
 ---
 
+## 7. Disable modules you don't need
+
+Essays and /now are core. Projects, Books, and Craft are optional.
+
+To disable a module (e.g. Craft):
+
+1. Remove routes from `config/routes.rb` (both public and admin)
+2. Remove the nav link from `app/views/layouts/application.html.erb`
+3. Optionally remove models, controllers, views, and migrations
+
+The app works with any combination of modules enabled. No hidden dependencies between them.
+
+---
+
 ## Key commands
 
 ```bash
