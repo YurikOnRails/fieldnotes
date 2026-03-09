@@ -1,0 +1,25 @@
+/* Override Lexxy's built-in light-theme variables for our dark theme.
+   Must be loaded after lexxy-content.css. */
+
+:root {
+  --lexxy-color-ink:         var(--color-text);       /* #E8E3DC — main text */
+  --lexxy-color-ink-medium:  var(--color-muted);      /* #888780 — secondary text */
+  --lexxy-color-ink-light:   #555450;                 /* subtle text */
+  --lexxy-color-ink-lighter: var(--color-border);     /* #2E2E2E — borders */
+  --lexxy-color-ink-lightest: var(--code-surface);    /* #2A2A2A — code bg */
+  --lexxy-color-ink-inverted: var(--color-bg);        /* #0F0F0F */
+
+  --lexxy-color-canvas:      var(--color-surface);    /* #1A1A1A */
+  --lexxy-color-link:        var(--color-accent);     /* #E8722A */
+
+  --lexxy-color-code-bg:     var(--code-surface);
+
+  /* Code token colors adjusted for dark background */
+  --lexxy-color-code-token-property:    #79b8ff;
+  --lexxy-color-code-token-selector:    #85e89d;
+  --lexxy-color-code-token-function:    #b392f0;
+  --lexxy-color-code-token-punctuation: var(--color-text);
+  --lexxy-color-code-token-comment:     #6a7380;
+
+  --lexxy-color-table-header-bg: var(--color-surface);
+}
