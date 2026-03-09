@@ -11,7 +11,7 @@ class Views::Public::Books::IndexView < Views::Base
 
   def view_template
     content_for(:title, "Reading")
-    content_for(:main_class, "site-main--wide")
+    content_for(:main_class, "max-w-[90rem]")
     content_for(:head) do
       view_context.meta_tags(title: "Reading", description: "Books I've read and key ideas from each.")
     end

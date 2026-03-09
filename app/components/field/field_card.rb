@@ -18,7 +18,7 @@ class Components::Field::FieldCard < Components::Base
     article(class: CARD) do
       if cover_item
         div(class: "w-full aspect-video overflow-hidden") do
-          unsafe_raw helpers.picture_tag(
+          unsafe_raw view_context.picture_tag(
             cover_item.photo,
             alt: @series.title,
             sizes: "(max-width: 768px) 100vw, 50vw"

@@ -38,7 +38,7 @@
       </nav>
     </header>
 
-    <main class="flex-1 max-w-content mx-auto px-6 py-12 w-full <%= content_for(:main_class) %>">
+    <main class="flex-1 mx-auto px-6 py-12 w-full <%= content_for(:main_class).presence || "max-w-content" %>">
       <%= render "shared/flash" %>
       <%= yield %>
     </main>

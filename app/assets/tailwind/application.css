@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @source "../../views/**/*.{rb,html,html.erb}";
+@source "../../components/**/*.rb";
 
 @theme {
   /* Brand colors */
