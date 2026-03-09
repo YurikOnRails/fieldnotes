@@ -44,10 +44,12 @@
     </main>
 
     <footer class="site-footer">
-      <%= link_to "About",   about_path %>
-      <%= link_to "Uses",    uses_path %>
-      <%= link_to "Contact", contact_path %>
-      <%= link_to "RSS",     feed_path(format: :rss) %>
+      <nav class="site-footer-nav">
+        <%= link_to "About",   about_path %>
+        <%= link_to "Uses",    uses_path %>
+        <%= link_to "Contact", contact_path %>
+        <%= link_to "RSS",     feed_path(format: :rss) %>
+      </nav>
     </footer>
   </body>
 </html>
