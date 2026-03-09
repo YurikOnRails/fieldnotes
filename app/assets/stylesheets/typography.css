@@ -27,6 +27,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  margin: 0;
+  padding: 0;
   font-size: var(--text-base);
   line-height: var(--leading);
   color: var(--color-text);

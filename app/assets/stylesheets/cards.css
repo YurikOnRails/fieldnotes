@@ -148,14 +148,22 @@
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: var(--space-6);
   margin-top: var(--space-8);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .books-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .books-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 480px) {
   .books-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
 }
@@ -169,6 +177,7 @@
 }
 
 .book-card__cover {
+  width: 100%;
   aspect-ratio: 2 / 3;
   border-radius: var(--radius-card);
   overflow: hidden;
@@ -193,17 +202,26 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   padding: var(--space-4);
-  background: linear-gradient(135deg, var(--code-surface) 0%, var(--color-surface) 100%);
+  background: linear-gradient(160deg, #2A1A0F 0%, #1A0F08 100%);
+  border: 1px solid #3D2010;
   text-align: center;
+}
+
+.book-card__placeholder::before {
+  content: "📖";
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .book-card__placeholder span {
   color: var(--color-muted);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 500;
   line-height: 1.4;
 }
 
