@@ -14,15 +14,28 @@ For architecture decisions and philosophy, see `docs/architecture.md`.
 | Database | SQLite via Litestack |
 | Jobs / Cache / WS | Solid Queue · Solid Cache · Solid Cable |
 | Assets | Propshaft · Importmaps · Stimulus |
-| Views | ERB partials + helpers |
+| Views | **Phlex** components (`app/views/components/`) |
+| Styling | **Tailwind CSS v4** (via `tailwindcss-rails`) |
 | Rich text | Action Text + **Lexxy** `0.8.0.beta` — do NOT use Trix |
 | Images | Active Storage + libvips → AVIF/WebP |
 | Auth | Rails built-in authentication generator |
 | Deploy | Kamal 2 |
 
-**Hard rules:** No Tailwind. No ViewComponent. No Alpine/HTMX/React/Vue. No ActiveAdmin.
-Custom CSS only — design tokens in `app/assets/stylesheets/tokens.css`. Dark theme, orange accent.
+**Hard rules:** No ERB partials for UI components — use Phlex. No ViewComponent. No Alpine/HTMX/React/Vue. No ActiveAdmin.
+Use Tailwind utility classes — no custom CSS except for things Tailwind cannot express. Dark theme, orange accent (`orange-500`).
 Lexxy replaces Trix — `form.rich_text_area` renders Lexxy automatically. See `docs/design.md`.
+
+---
+
+## Phlex Conventions
+
+- All UI components live in `app/views/components/` and inherit from `ApplicationComponent < Phlex::HTML`.
+- Page views live in `app/views/pages/` (e.g. `Essays::IndexView`), inheriting from `ApplicationView`.
+- Layouts are Phlex components in `app/views/layouts/`.
+- Controllers render Phlex views: `render EssaysIndexView.new(essays: @essays)`.
+- Shared markup → a Phlex component, not a partial. Logic → the component itself or a helper module.
+- Keep `#view_template` focused; extract sub-components when a component exceeds ~80 lines.
+- Use `@slots` / `renders_one` / `renders_many` for composable components.
 
 ---
 
@@ -96,7 +109,7 @@ Footer: /about · /uses · /contact · GitHub · RSS (`/feed.rss`)
 ## Coding Conventions
 
 - **Ruby 4.0:** use `it` block parameter, PRISM parser. Write modern Ruby.
-- **ERB only** — no ViewComponent. Shared markup → `app/views/shared/_partial.html.erb`. Logic → `ApplicationHelper`.
+- **Phlex for all views** — no ERB for UI. Use Tailwind utility classes for styling.
 - **Stimulus for JS** — one controller per behavior. >50 lines → reconsider the design.
 - **Slugs are human-readable:** `/essays/rails-sqlite-production-2026` not `/essays/1234`
 - **Never inline image variants** — warm via `ImageVariantJob` after upload.

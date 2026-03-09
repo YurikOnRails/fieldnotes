@@ -3,10 +3,12 @@ class Admin::EssaysController < Admin::BaseController
 
   def index
     @essays = Essay.includes(:cover_attachment).order(created_at: :desc)
+    render Views::Admin::Essays::IndexView.new(essays: @essays)
   end
 
   def new
     @essay = Essay.new
+    render Views::Admin::Essays::NewView.new(essay: @essay)
   end
 
   def create
@@ -15,11 +17,12 @@ class Admin::EssaysController < Admin::BaseController
     if @essay.save
       redirect_to edit_admin_essay_url(@essay), notice: @essay.published? ? "Published!" : "Draft saved"
     else
-      render :new, status: :unprocessable_entity
+      render Views::Admin::Essays::NewView.new(essay: @essay), status: :unprocessable_entity
     end
   end
 
   def edit
+    render Views::Admin::Essays::EditView.new(essay: @essay)
   end
 
   def update
@@ -28,7 +31,7 @@ class Admin::EssaysController < Admin::BaseController
     if @essay.save
       redirect_to edit_admin_essay_url(@essay), notice: @essay.published? ? "Published!" : "Draft saved"
     else
-      render :edit, status: :unprocessable_entity
+      render Views::Admin::Essays::EditView.new(essay: @essay), status: :unprocessable_entity
     end
   end
 

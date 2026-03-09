@@ -2,13 +2,14 @@ class Admin::SettingsController < Admin::BaseController
   before_action :set_setting
 
   def edit
+    render Views::Admin::Settings::EditView.new(setting: @setting)
   end
 
   def update
     if @setting.update(setting_params)
       redirect_to edit_admin_settings_path, notice: "Settings saved"
     else
-      render :edit, status: :unprocessable_entity
+      render Views::Admin::Settings::EditView.new(setting: @setting), status: :unprocessable_entity
     end
   end
 

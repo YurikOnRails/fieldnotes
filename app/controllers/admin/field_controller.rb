@@ -3,13 +3,16 @@ class Admin::FieldController < Admin::BaseController
 
   def index
     @series = FieldSeries.includes(field_items: :photo_attachment).order(created_at: :desc)
+    render Views::Admin::Field::IndexView.new(series: @series)
   end
 
   def show
+    render Views::Admin::Field::ShowView.new(series: @series)
   end
 
   def new
     @series = FieldSeries.new
+    render Views::Admin::Field::NewView.new(series: @series)
   end
 
   def create
@@ -17,18 +20,19 @@ class Admin::FieldController < Admin::BaseController
     if @series.save
       redirect_to admin_field_url(@series), notice: "Series created"
     else
-      render :new, status: :unprocessable_entity
+      render Views::Admin::Field::NewView.new(series: @series), status: :unprocessable_entity
     end
   end
 
   def edit
+    render Views::Admin::Field::EditView.new(series: @series)
   end
 
   def update
     if @series.update(field_series_params)
       redirect_to admin_field_url(@series), notice: "Series updated"
     else
-      render :edit, status: :unprocessable_entity
+      render Views::Admin::Field::EditView.new(series: @series), status: :unprocessable_entity
     end
   end
 

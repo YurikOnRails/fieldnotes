@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@source "../../views/**/*.{rb,html,html.erb}";
+
+@theme {
+  /* Brand colors */
+  --color-bg:           #0F0F0F;
+  --color-surface:      #1A1A1A;
+  --color-border:       #2E2E2E;
+  --color-ink:          #E8E3DC;
+  --color-muted:        #888780;
+  --color-accent:       #E8722A;
+  --color-accent-hover: #F08040;
+
+  /* Code surfaces */
+  --color-code-bg:   #2A2A2A;
+  --color-pre-bg:    #1E1E1E;
+  --color-code-text: #E8C9A0;
+
+  /* Status colors */
+  --color-green-bg:    #1A2E22;
+  --color-green-text:  #6EE7A0;
+  --color-blue-bg:     #1A1F2E;
+  --color-blue-text:   #93C5FD;
+  --color-purple-bg:   #1F1A2E;
+  --color-purple-text: #C4B5FD;
+  --color-amber-bg:    #2A1E0A;
+  --color-amber-text:  #FBB040;
+  --color-red-bg:      #2E1A1A;
+  --color-red-text:    #F87171;
+
+  /* Typography */
+  --font-family-sans: 'Onest', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --max-width-content: 70ch;
+  --max-width-wide: 90rem;
+}

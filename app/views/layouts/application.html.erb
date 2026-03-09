@@ -14,44 +14,42 @@
     <% end %>
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%= stylesheet_link_tag "tokens", "typography", "layout", "cards", "field", "essays", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "lexxy-content", "lexxy-overrides", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <header class="site-header">
-      <nav class="site-nav">
-        <%= link_to "Fieldnotes", root_path, class: "site-nav-brand" %>
-        <div class="site-nav-links">
-          <%= link_to "Essays",  essays_path,      aria: { current: controller_path.end_with?("essays")  ? "page" : nil } %>
-          <%= link_to "Builds",  builds_path,      aria: { current: controller_path.end_with?("builds")  ? "page" : nil } %>
-          <%= link_to "Reading", books_path,       aria: { current: controller_path.end_with?("books")   ? "page" : nil } %>
-          <%= link_to "Field",   field_index_path, aria: { current: controller_path.end_with?("field")   ? "page" : nil } %>
-          <%= link_to "Now",     now_path,         aria: { current: controller_path.end_with?("now")     ? "page" : nil } %>
+  <body class="bg-bg text-ink font-sans antialiased flex flex-col min-h-screen">
+    <header class="border-b border-border bg-surface sticky top-0 z-10">
+      <nav class="max-w-[90rem] mx-auto px-6 h-[3.25rem] flex items-center justify-between gap-6">
+        <%= link_to "Fieldnotes", root_path, class: "font-bold text-base tracking-tight text-ink hover:text-accent flex-shrink-0" %>
+        <div class="flex items-center gap-1">
+          <%= link_to "Essays",  essays_path,      class: nav_link_class("essays"),  aria: { current: controller_path.end_with?("essays")  ? "page" : nil } %>
+          <%= link_to "Builds",  builds_path,      class: nav_link_class("builds"),  aria: { current: controller_path.end_with?("builds")  ? "page" : nil } %>
+          <%= link_to "Reading", books_path,       class: nav_link_class("books"),   aria: { current: controller_path.end_with?("books")   ? "page" : nil } %>
+          <%= link_to "Field",   field_index_path, class: nav_link_class("field"),   aria: { current: controller_path.end_with?("field")   ? "page" : nil } %>
+          <%= link_to "Now",     now_path,         class: nav_link_class("now"),     aria: { current: controller_path.end_with?("now")     ? "page" : nil } %>
         </div>
       </nav>
     </header>
 
-    <main class="site-main <%= content_for(:main_class) %>">
+    <main class="flex-1 max-w-content mx-auto px-6 py-12 w-full <%= content_for(:main_class) %>">
       <%= render "shared/flash" %>
       <%= yield %>
     </main>
 
-    <footer class="site-footer">
-      <nav class="site-footer-nav">
-        <%= link_to "About",   about_path %>
-        <%= link_to "Uses",    uses_path %>
-        <%= link_to "Contact", contact_path %>
-        <%= link_to "GitHub",  "https://github.com/YurikOnRails" %>
-        <%= link_to "RSS",     feed_path(format: :rss) %>
+    <footer class="border-t border-border">
+      <nav class="max-w-[90rem] mx-auto px-6 py-8 flex gap-6 text-sm">
+        <%= link_to "About",   about_path,                       class: "text-muted hover:text-accent transition" %>
+        <%= link_to "Uses",    uses_path,                        class: "text-muted hover:text-accent transition" %>
+        <%= link_to "Contact", contact_path,                     class: "text-muted hover:text-accent transition" %>
+        <%= link_to "GitHub",  "https://github.com/YurikOnRails", class: "text-muted hover:text-accent transition" %>
+        <%= link_to "RSS",     feed_path(format: :rss),          class: "text-muted hover:text-accent transition" %>
       </nav>
     </footer>
   </body>
