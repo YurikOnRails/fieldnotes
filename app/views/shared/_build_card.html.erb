@@ -1,7 +1,16 @@
-<article>
-  <h2><%= build.icon_emoji %> <%= build.title %></h2>
-  <% if build.description.present? %>
-    <p><%= build.description %></p>
-  <% end %>
-  <span><%= build.status %></span>
+<article class="build-card">
+  <div class="build-card__icon"><%= build.icon_emoji %></div>
+  <div class="build-card__body">
+    <h2 class="build-card__title">
+      <% if build.url.present? %>
+        <%= link_to build.title, build.url, target: "_blank", rel: "noopener noreferrer" %>
+      <% else %>
+        <%= build.title %>
+      <% end %>
+    </h2>
+    <% if build.description.present? %>
+      <p class="build-card__desc"><%= build.description %></p>
+    <% end %>
+  </div>
+  <span class="build-status build-status--<%= build.status %>"><%= build.status %></span>
 </article>

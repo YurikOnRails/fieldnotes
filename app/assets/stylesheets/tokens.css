@@ -1,16 +1,16 @@
 :root {
-  --color-bg:           #FAF9F7;
-  --color-surface:      #FFFFFF;
-  --color-border:       #E8E3DC;
-  --color-text:         #1C1917;
-  --color-muted:        #78716C;
-  --color-accent:       #2D6A4F;
-  --color-accent-hover: #235A42;
+  --color-bg:           #0F0F0F;
+  --color-surface:      #1A1A1A;
+  --color-border:       #2E2E2E;
+  --color-text:         #E8E3DC;
+  --color-muted:        #888780;
+  --color-accent:       #E8722A;
+  --color-accent-hover: #F08040;
 
   --font-sans: 'Onest', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --text-base: 1.125rem;
-  --leading:   1.7;
+  --leading:   1.8;
 
   --space-1:  0.25rem;
   --space-2:  0.5rem;
@@ -24,11 +24,11 @@
   --width-content: 70ch;
   --width-wide:    90rem;
 
-  --radius-card: 14px;
+  --radius-card: 12px;
   --radius-btn:  999px;
 
-  --shadow-card:  0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 8px rgba(0,0,0,0.10), 0 12px 24px rgba(0,0,0,0.07);
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-hover: 0 4px 8px rgba(0,0,0,0.5), 0 12px 24px rgba(0,0,0,0.4);
 
   --transition: 200ms ease;
 }

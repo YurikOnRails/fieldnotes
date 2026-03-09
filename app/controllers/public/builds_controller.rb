@@ -3,6 +3,7 @@ class Public::BuildsController < Public::BaseController
 
   def index
     @builds = Build.active.ordered
+    @profile = Profile.instance
     fresh_when @builds
   end
 end

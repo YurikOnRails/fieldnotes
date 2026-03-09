@@ -55,7 +55,7 @@ body {
 
 .site-nav-links a:hover {
   color: var(--color-text);
-  background: var(--color-bg);
+  background: #2A2A2A;
 }
 
 /* Active indicator */
@@ -116,6 +116,11 @@ body {
   max-width: var(--width-wide);
 }
 
+/* Essay layout — wider than content, narrower than wide */
+.site-main--essay {
+  max-width: calc(var(--width-content) + 320px);
+}
+
 /* Flash messages */
 .flash {
   padding: var(--space-3) var(--space-4);
@@ -125,11 +130,11 @@ body {
 }
 
 .flash--notice {
-  background: #D1FAE5;
-  color: #065F46;
+  background: #1A2E22;
+  color: #6EE7A0;
 }
 
 .flash--alert {
-  background: #FEE2E2;
-  color: #991B1B;
+  background: #2E1A1A;
+  color: #F87171;
 }

@@ -54,17 +54,32 @@ a {
 
 a:hover { color: var(--color-accent-hover); }
 
-code, pre {
+code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.875em;
+  background: #2A2A2A;
+  color: #E8C9A0;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
 }
 
 pre {
-  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: #1E1E1E;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  padding: var(--space-4);
+  padding: var(--space-6);
   overflow-x: auto;
+  line-height: 1.6;
+}
+
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
 }
 
 time { color: var(--color-muted); font-size: 0.875rem; }

@@ -36,3 +36,109 @@ article p {
   color: var(--color-muted);
   margin-bottom: var(--space-3);
 }
+
+/* ─── Profile hero ───────────────────────────────────────────────────────── */
+
+.profile-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-hero__avatar img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: var(--color-surface);
+}
+
+.profile-hero__name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+}
+
+.profile-hero__bio {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 55ch;
+}
+
+.profile-hero__bio p { margin-bottom: var(--space-2); }
+.profile-hero__bio p:last-child { margin-bottom: 0; }
+
+/* ─── Builds grid ─────────────────────────────────────────────────────────── */
+
+.builds-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 600px) {
+  .builds-grid { grid-template-columns: 1fr; }
+}
+
+.build-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: 0;
+  box-shadow: none;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.build-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.build-card__icon { font-size: 2rem; line-height: 1; }
+
+.build-card__body { flex: 1; }
+
+.build-card__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+}
+
+.build-card__title a { color: var(--color-text); }
+.build-card__title a:hover { color: var(--color-accent); }
+
+.build-card__desc {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.build-status {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius-btn);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.build-status--active    { background: #1A2E22; color: #6EE7A0; }
+.build-status--paused    { background: #2A1E0A; color: #FBB040; }
+.build-status--completed { background: #1A1F2E; color: #93C5FD; }
+.build-status--archived  { background: #222; color: var(--color-muted); }

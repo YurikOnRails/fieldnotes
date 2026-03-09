@@ -63,9 +63,9 @@
   line-height: 1.8;
 }
 
-.field-badge--photo { background: #D1FAE5; color: #065F46; }
-.field-badge--video { background: #DBEAFE; color: #1E40AF; }
-.field-badge--mixed { background: #F3E8FF; color: #6B21A8; }
+.field-badge--photo { background: #1A2E22; color: #6EE7A0; }
+.field-badge--video { background: #1A1F2E; color: #93C5FD; }
+.field-badge--mixed { background: #241A2E; color: #C4B5FD; }
 
 /* ───────────────────────────────────────────
    Gallery
