@@ -75,6 +75,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
+  /* Full-bleed: break out of site-main container */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
 }
 
 .field-figure {
@@ -86,7 +91,6 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 4px;
 }
 
 /* YouTube embed */
@@ -113,6 +117,7 @@
   color: var(--color-muted);
   line-height: 1.5;
   max-width: 65ch;
+  padding: 0 var(--space-6);
 }
 
 /* ───────────────────────────────────────────
