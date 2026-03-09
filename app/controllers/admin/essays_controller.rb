@@ -1,11 +1,8 @@
 class Admin::EssaysController < Admin::BaseController
-  before_action :set_essay, only: [:show, :edit, :update, :destroy]
+  before_action :set_essay, only: [:edit, :update, :destroy]
 
   def index
     @essays = Essay.order(created_at: :desc)
-  end
-
-  def show
   end
 
   def new
@@ -15,7 +12,7 @@ class Admin::EssaysController < Admin::BaseController
   def create
     @essay = Essay.new(essay_params)
     if @essay.save
-      redirect_to admin_essay_url(@essay), notice: "Essay created"
+      redirect_to edit_admin_essay_url(@essay), notice: "Essay created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +23,7 @@ class Admin::EssaysController < Admin::BaseController
 
   def update
     if @essay.update(essay_params)
-      redirect_to admin_essay_url(@essay), notice: "Essay updated"
+      redirect_to edit_admin_essay_url(@essay), notice: "Essay updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,7 +41,7 @@ class Admin::EssaysController < Admin::BaseController
   end
 
   def essay_params
-    params.require(:essay).permit(:title, :slug, :excerpt, :status, :published_at,
+    params.require(:essay).permit(:title, :excerpt, :status, :published_at,
                                   :latitude, :longitude, :location_name, :cover, :content)
   end
 end

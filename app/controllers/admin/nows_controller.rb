@@ -1,6 +1,7 @@
 class Admin::NowsController < Admin::BaseController
   def edit
     @now_entry = NowEntry.latest || NowEntry.new(published_at: Time.current)
+    @previous_entries = NowEntry.previous.limit(10)
   end
 
   def update

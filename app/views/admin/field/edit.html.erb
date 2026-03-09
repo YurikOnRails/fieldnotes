@@ -1,2 +1,5 @@
-<h1>Edit Series</h1>
+<div class="admin-toolbar">
+  <h1>Edit Series</h1>
+  <%= link_to "View on site", field_path(@series.slug), target: "_blank", class: "btn btn--secondary" %>
+</div>
 <%= render "form", series: @series %>

@@ -1,8 +1,21 @@
-<h1>Now</h1>
+<div class="admin-toolbar">
+  <h1>Now</h1>
+  <%= link_to "View on site", now_path, target: "_blank", class: "btn btn--secondary" %>
+</div>
 
 <div class="admin-card">
   <%= form_with model: @now_entry, url: admin_now_path, method: :patch do |f| %>
     <div class="field"><%= f.rich_text_area :body %></div>
+    <p class="field-hint">Each update creates a new entry. Previous versions are kept as history.</p>
     <%= f.submit "Update", class: "btn btn--primary" %>
   <% end %>
 </div>
+
+<% if @previous_entries.any? %>
+  <h2>Previous entries</h2>
+  <% @previous_entries.each do |entry| %>
+    <div class="admin-card">
+      <p class="field-hint"><%= entry.published_at.strftime("%b %d, %Y at %H:%M") %></p>
+    </div>
+  <% end %>
+<% end %>

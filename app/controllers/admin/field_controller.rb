@@ -44,7 +44,7 @@ class Admin::FieldController < Admin::BaseController
   end
 
   def field_series_params
-    params.require(:field_series).permit(:title, :slug, :description, :kind,
+    params.require(:field_series).permit(:title, :description, :kind,
                                          :location, :taken_on, :latitude, :longitude)
   end
 end

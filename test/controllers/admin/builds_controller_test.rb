@@ -15,9 +15,9 @@ class Admin::BuildsControllerTest < ActionDispatch::IntegrationTest
 
   test "create with valid params" do
     assert_difference("Build.count", 1) do
-      post admin_builds_url, params: { build: { title: "New Build", slug: "new-build", status: "active", kind: "oss" } }
+      post admin_builds_url, params: { build: { title: "New Build", status: "active", kind: "oss" } }
     end
-    assert_redirected_to admin_build_url(Build.last)
+    assert_redirected_to edit_admin_build_url(Build.last)
   end
 
   test "create with invalid params renders 422" do
@@ -27,7 +27,7 @@ class Admin::BuildsControllerTest < ActionDispatch::IntegrationTest
 
   test "update changes build" do
     patch admin_build_url(builds(:first_position)), params: { build: { title: "Updated" } }
-    assert_redirected_to admin_build_url(builds(:first_position))
+    assert_redirected_to edit_admin_build_url(builds(:first_position))
     assert_equal "Updated", builds(:first_position).reload.title
   end
 

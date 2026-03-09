@@ -1,2 +1,7 @@
-<h1>Edit Essay</h1>
+<div class="admin-toolbar">
+  <h1>Edit Essay</h1>
+  <% if @essay.published? %>
+    <%= link_to "View on site", essay_path(@essay.slug), target: "_blank", class: "btn btn--secondary" %>
+  <% end %>
+</div>
 <%= render "form", essay: @essay %>

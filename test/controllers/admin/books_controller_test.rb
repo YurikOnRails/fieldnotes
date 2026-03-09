@@ -17,7 +17,7 @@ class Admin::BooksControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Book.count", 1) do
       post admin_books_url, params: { book: { title: "New Book", author: "Author", status: "reading" } }
     end
-    assert_redirected_to admin_book_url(Book.last)
+    assert_redirected_to edit_admin_book_url(Book.last)
   end
 
   test "create with invalid params renders 422" do
@@ -27,7 +27,7 @@ class Admin::BooksControllerTest < ActionDispatch::IntegrationTest
 
   test "update changes book" do
     patch admin_book_url(books(:completed_recent)), params: { book: { title: "Updated" } }
-    assert_redirected_to admin_book_url(books(:completed_recent))
+    assert_redirected_to edit_admin_book_url(books(:completed_recent))
     assert_equal "Updated", books(:completed_recent).reload.title
   end
 

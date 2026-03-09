@@ -25,7 +25,7 @@
       <%= f.file_field :avatar, accept: "image/*" %>
       <% if @profile.avatar.attached? %>
         <p class="field-hint">Current: <%= @profile.avatar.filename %> — upload a new file to replace</p>
-        <%= image_tag @profile.avatar, alt: "Avatar", style: "width:80px;height:80px;border-radius:50%;object-fit:cover;margin-top:8px;" %>
+        <%= image_tag @profile.avatar, alt: "Avatar", class: "avatar-preview" %>
       <% end %>
     </div>
   </div>

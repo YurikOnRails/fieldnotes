@@ -1,11 +1,8 @@
 class Admin::BooksController < Admin::BaseController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:edit, :update, :destroy]
 
   def index
     @books = Book.by_year
-  end
-
-  def show
   end
 
   def new
@@ -15,7 +12,7 @@ class Admin::BooksController < Admin::BaseController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to admin_book_url(@book), notice: "Book created"
+      redirect_to edit_admin_book_url(@book), notice: "Book created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +23,7 @@ class Admin::BooksController < Admin::BaseController
 
   def update
     if @book.update(book_params)
-      redirect_to admin_book_url(@book), notice: "Book updated"
+      redirect_to edit_admin_book_url(@book), notice: "Book updated"
     else
       render :edit, status: :unprocessable_entity
     end

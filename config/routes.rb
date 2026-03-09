@@ -18,9 +18,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "essays#index"
-    resources :essays
-    resources :builds
-    resources :books
+    resources :essays, except: :show
+    resources :builds, except: :show
+    resources :books, except: :show
     resources :field do
       resources :field_items, only: [:create, :destroy, :update]
     end

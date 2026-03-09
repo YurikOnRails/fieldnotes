@@ -15,19 +15,14 @@ class Admin::EssaysControllerTest < ActionDispatch::IntegrationTest
 
   test "create with valid params" do
     assert_difference("Essay.count", 1) do
-      post admin_essays_url, params: { essay: { title: "New Essay", slug: "new-essay", status: "draft" } }
+      post admin_essays_url, params: { essay: { title: "New Essay", status: "draft" } }
     end
-    assert_redirected_to admin_essay_url(Essay.last)
+    assert_redirected_to edit_admin_essay_url(Essay.last)
   end
 
   test "create with invalid params renders 422" do
     post admin_essays_url, params: { essay: { title: "", slug: "" } }
     assert_response :unprocessable_entity
-  end
-
-  test "show renders essay" do
-    get admin_essay_url(essays(:draft))
-    assert_response :success
   end
 
   test "edit renders form" do
@@ -37,7 +32,7 @@ class Admin::EssaysControllerTest < ActionDispatch::IntegrationTest
 
   test "update changes essay" do
     patch admin_essay_url(essays(:draft)), params: { essay: { title: "Updated" } }
-    assert_redirected_to admin_essay_url(essays(:draft))
+    assert_redirected_to edit_admin_essay_url(essays(:draft))
     assert_equal "Updated", essays(:draft).reload.title
   end
 

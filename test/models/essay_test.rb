@@ -13,9 +13,10 @@ class EssayTest < ActiveSupport::TestCase
     assert_includes essay.errors[:title], "can't be blank"
   end
 
-  test "invalid without slug" do
-    essay = Essay.new(title: "Test", status: "draft")
-    assert_not essay.valid?
+  test "auto-generates slug from title on create" do
+    essay = Essay.new(title: "My Great Post", status: "draft")
+    essay.valid?
+    assert_equal "my-great-post", essay.slug
   end
 
   test "slug must be unique" do

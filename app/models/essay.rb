@@ -13,6 +13,8 @@ class Essay < ApplicationRecord
 
   STATUSES = %w[draft published].freeze
 
+  before_save :set_published_at
+
   validates :title, presence: true
   validates :status, inclusion: { in: STATUSES }
 
@@ -25,5 +27,11 @@ class Essay < ApplicationRecord
 
   def draft?
     status == "draft"
+  end
+
+  private
+
+  def set_published_at
+    self.published_at = Time.current if published? && published_at.blank?
   end
 end

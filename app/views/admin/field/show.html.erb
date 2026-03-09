@@ -1,7 +1,59 @@
-<h1><%= @series.title %></h1>
-<%= link_to "Edit", edit_admin_field_path(@series) %>
-<%= link_to "Back", admin_field_index_path %>
-<h2>Items</h2>
+<div class="admin-toolbar">
+  <h1><%= @series.title %></h1>
+  <%= link_to "Edit series", edit_admin_field_path(@series), class: "btn btn--secondary" %>
+  <%= link_to "View on site", field_path(@series.slug), target: "_blank", class: "btn btn--secondary" %>
+</div>
+
+<h2>Items (<%= @series.field_items.count %>)</h2>
+
 <% @series.field_items.ordered.each do |item| %>
-  <p><%= item.kind %> — <%= item.caption %></p>
+  <div class="admin-card field-item-card">
+    <div class="field-item-card__content">
+      <% if item.photo.attached? %>
+        <div class="field-item-card__photo">
+          <%= image_tag item.photo.variant(:thumb), alt: item.caption.to_s %>
+        </div>
+      <% end %>
+      <div class="field-item-card__details">
+        <span class="badge badge--<%= item.kind %>"><%= item.kind %></span>
+        <% if item.caption.present? %>
+          <p class="field-item-card__caption"><%= item.caption %></p>
+        <% end %>
+        <% if item.youtube_url.present? %>
+          <p class="field-hint"><%= item.youtube_url %></p>
+        <% end %>
+        <p class="field-hint">Position: <%= item.position %></p>
+      </div>
+    </div>
+    <div class="field-item-card__actions">
+      <%= button_to "Delete", admin_field_field_item_path(@series, item), method: :delete, form: { data: { turbo_confirm: "Delete this item?" } }, class: "btn btn--danger btn--small" %>
+    </div>
+  </div>
 <% end %>
+
+<div class="admin-card">
+  <h2>Add item</h2>
+  <%= form_with model: [@series, FieldItem.new], url: admin_field_field_items_path(@series) do |f| %>
+    <div class="field">
+      <%= f.label :kind %>
+      <%= f.select :kind, FieldItem::KINDS %>
+    </div>
+    <div class="field">
+      <%= f.label :photo %>
+      <%= f.file_field :photo, accept: "image/*" %>
+    </div>
+    <div class="field">
+      <%= f.label :caption %>
+      <%= f.text_field :caption %>
+    </div>
+    <div class="field">
+      <%= f.label :youtube_url, "YouTube URL (for videos)" %>
+      <%= f.url_field :youtube_url %>
+    </div>
+    <div class="field">
+      <%= f.label :position %>
+      <%= f.number_field :position, value: (@series.field_items.maximum(:position).to_i + 1) %>
+    </div>
+    <%= f.submit "Add item", class: "btn btn--primary" %>
+  <% end %>
+</div>

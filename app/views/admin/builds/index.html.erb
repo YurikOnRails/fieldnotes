@@ -3,21 +3,24 @@
   <%= link_to "New Build", new_admin_build_path, class: "btn btn--primary" %>
 </div>
 
-<table class="admin-table">
-  <thead>
-    <tr><th>Title</th><th>Kind</th><th>Status</th><th></th></tr>
-  </thead>
-  <tbody>
-    <% @builds.each do |build| %>
-      <tr>
-        <td><%= link_to build.title, admin_build_path(build) %></td>
-        <td><%= build.kind %></td>
-        <td><span class="badge badge--<%= build.status %>"><%= build.status %></span></td>
-        <td class="actions">
-          <%= link_to "Edit", edit_admin_build_path(build) %>
-          <%= button_to "Delete", admin_build_path(build), method: :delete, form: { data: { turbo_confirm: "Delete «#{build.title}»?" } }, class: "btn btn--danger" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @builds.any? %>
+  <table class="admin-table">
+    <thead>
+      <tr><th>Title</th><th>Kind</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% @builds.each do |build| %>
+        <tr>
+          <td><%= link_to build.title, edit_admin_build_path(build) %></td>
+          <td><%= build.kind %></td>
+          <td><span class="badge badge--<%= build.status %>"><%= build.status %></span></td>
+          <td class="actions">
+            <%= button_to "Delete", admin_build_path(build), method: :delete, form: { data: { turbo_confirm: "Delete «#{build.title}»?" } }, class: "btn btn--danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="admin-empty">No builds yet. <%= link_to "Add your first one", new_admin_build_path %>.</p>
+<% end %>

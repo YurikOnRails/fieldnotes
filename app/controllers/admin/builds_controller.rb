@@ -1,11 +1,8 @@
 class Admin::BuildsController < Admin::BaseController
-  before_action :set_build, only: [:show, :edit, :update, :destroy]
+  before_action :set_build, only: [:edit, :update, :destroy]
 
   def index
     @builds = Build.ordered
-  end
-
-  def show
   end
 
   def new
@@ -14,8 +11,9 @@ class Admin::BuildsController < Admin::BaseController
 
   def create
     @build = Build.new(build_params)
+    @build.position ||= Build.maximum(:position).to_i + 1
     if @build.save
-      redirect_to admin_build_url(@build), notice: "Build created"
+      redirect_to edit_admin_build_url(@build), notice: "Build created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +24,7 @@ class Admin::BuildsController < Admin::BaseController
 
   def update
     if @build.update(build_params)
-      redirect_to admin_build_url(@build), notice: "Build updated"
+      redirect_to edit_admin_build_url(@build), notice: "Build updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,7 +42,7 @@ class Admin::BuildsController < Admin::BaseController
   end
 
   def build_params
-    params.require(:build).permit(:title, :slug, :description, :url, :icon_emoji,
+    params.require(:build).permit(:title, :description, :url, :icon_emoji,
                                   :status, :kind, :position, :started_on, :finished_on, :cover)
   end
 end
