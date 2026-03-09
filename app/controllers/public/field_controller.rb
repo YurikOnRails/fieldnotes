@@ -2,7 +2,7 @@ class Public::FieldController < Public::BaseController
   rate_limit to: 60, within: 1.minute, only: :index
 
   def index
-    @series = FieldSeries.order(created_at: :desc)
+    @series = FieldSeries.includes(field_items: { photo_attachment: :blob }).order(created_at: :desc)
     fresh_when @series
   end
 

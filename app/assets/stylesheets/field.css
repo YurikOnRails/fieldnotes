@@ -1,0 +1,154 @@
+/* ───────────────────────────────────────────
+   Field show page
+   ─────────────────────────────────────────── */
+
+.field-breadcrumb {
+  margin-bottom: var(--space-8);
+  font-size: 0.9375rem;
+}
+
+.field-breadcrumb a {
+  color: var(--color-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.field-breadcrumb a:hover { color: var(--color-accent); }
+
+.field-header {
+  max-width: var(--width-content);
+  margin-bottom: var(--space-12);
+}
+
+.field-header h1 {
+  margin-bottom: var(--space-4);
+}
+
+/* Meta bar: location · date · badge */
+.field-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+.field-meta-sep {
+  color: var(--color-border);
+}
+
+.field-description {
+  color: var(--color-muted);
+  max-width: 60ch;
+  margin-bottom: 0;
+}
+
+/* ───────────────────────────────────────────
+   Kind badge (shared: show + index card)
+   ─────────────────────────────────────────── */
+
+.field-badge {
+  display: inline-block;
+  padding: 0.2em 0.75em;
+  border-radius: var(--radius-btn);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-border);
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.field-badge--photo { background: #D1FAE5; color: #065F46; }
+.field-badge--video { background: #DBEAFE; color: #1E40AF; }
+.field-badge--mixed { background: #F3E8FF; color: #6B21A8; }
+
+/* ───────────────────────────────────────────
+   Gallery
+   ─────────────────────────────────────────── */
+
+.field-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.field-figure {
+  margin: 0;
+}
+
+.field-figure__media picture,
+.field-figure__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* YouTube embed */
+.field-figure__video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: #000;
+}
+
+.field-figure__video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.field-caption {
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  max-width: 65ch;
+}
+
+/* ───────────────────────────────────────────
+   Field card (index page)
+   ─────────────────────────────────────────── */
+
+.field-card-cover {
+  margin: calc(var(--space-6) * -1);
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-border);
+}
+
+.field-card-cover picture,
+.field-card-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.card-linked:hover .field-card-cover img {
+  transform: scale(1.03);
+}
+
+.field-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.field-card-meta {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}

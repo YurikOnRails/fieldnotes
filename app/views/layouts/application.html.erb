@@ -30,15 +30,18 @@
   <body>
     <header class="site-header">
       <nav class="site-nav">
-        <%= link_to "Essays",  essays_path,      data: { emoji: "✍️" } %>
-        <%= link_to "Builds",  builds_path,      data: { emoji: "🔧" } %>
-        <%= link_to "Reading", books_path,       data: { emoji: "📚" } %>
-        <%= link_to "Field",   field_index_path, data: { emoji: "📷" } %>
-        <%= link_to "Now",     now_path,         data: { emoji: "🌱" } %>
+        <%= link_to "Fieldnotes", root_path, class: "site-nav-brand" %>
+        <div class="site-nav-links">
+          <%= link_to "Essays",  essays_path,      aria: { current: controller_path.end_with?("essays")  ? "page" : nil } %>
+          <%= link_to "Builds",  builds_path,      aria: { current: controller_path.end_with?("builds")  ? "page" : nil } %>
+          <%= link_to "Reading", books_path,       aria: { current: controller_path.end_with?("books")   ? "page" : nil } %>
+          <%= link_to "Field",   field_index_path, aria: { current: controller_path.end_with?("field")   ? "page" : nil } %>
+          <%= link_to "Now",     now_path,         aria: { current: controller_path.end_with?("now")     ? "page" : nil } %>
+        </div>
       </nav>
     </header>
 
-    <main class="site-main">
+    <main class="site-main <%= content_for(:main_class) %>">
       <%= render "shared/flash" %>
       <%= yield %>
     </main>

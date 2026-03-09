@@ -25,6 +25,9 @@ Rails.application.routes.draw do
       resources :field_items, only: [:create, :destroy, :update]
     end
     resource :now, only: [:edit, :update]
+    resource :settings, only: [:edit, :update] do
+      post :regenerate_watermarks, on: :member
+    end
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

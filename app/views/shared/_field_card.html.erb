@@ -1,7 +1,26 @@
-<article>
+<% cover_item = series.field_items.find { |item| item.photo.attached? } %>
+<article class="card-linked">
+  <% if cover_item %>
+    <div class="field-card-cover">
+      <%= picture_tag cover_item.photo, alt: series.title %>
+    </div>
+  <% end %>
+
   <h2><%= link_to series.title, field_path(slug: series.slug) %></h2>
+
   <% if series.description.present? %>
     <p><%= series.description %></p>
   <% end %>
-  <span><%= series.kind %></span>
+
+  <div class="field-card-footer">
+    <span class="field-badge field-badge--<%= series.kind %>"><%= series.kind %></span>
+    <% if series.location.present? %>
+      <span class="field-card-meta">📍 <%= series.location %></span>
+    <% end %>
+    <% if series.taken_on.present? %>
+      <time class="field-card-meta" datetime="<%= series.taken_on.iso8601 %>">
+        <%= series.taken_on.strftime("%b %Y") %>
+      </time>
+    <% end %>
+  </div>
 </article>

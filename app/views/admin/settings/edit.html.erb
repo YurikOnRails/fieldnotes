@@ -1,0 +1,63 @@
+<div class="admin-toolbar">
+  <h1>Settings</h1>
+</div>
+
+<%= form_with model: @setting, url: admin_settings_path, method: :patch do |f| %>
+  <% if @setting.errors.any? %>
+    <div class="error-list">
+      <% @setting.errors.each do |e| %><p><%= e.full_message %></p><% end %>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <h2 class="admin-card__title">Watermark</h2>
+
+    <div class="field">
+      <%= f.label :watermark_enabled, "Enable watermark on Field photos" %>
+      <%= f.check_box :watermark_enabled %>
+    </div>
+
+    <div class="field">
+      <%= f.label :watermark, "Watermark image (PNG with transparency)" %>
+      <%= f.file_field :watermark, accept: "image/png" %>
+      <% if @setting.watermark.attached? %>
+        <p class="admin-hint">Current: <%= @setting.watermark.filename %> — upload a new file to replace it</p>
+        <div class="settings-watermark-preview">
+          <%= image_tag @setting.watermark, alt: "Watermark preview", style: "max-height: 60px; background: #888; padding: 8px; border-radius: 4px;" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :watermark_position, "Position" %>
+      <%= f.select :watermark_position, [
+        ["Bottom right", "bottom_right"],
+        ["Bottom left",  "bottom_left"],
+        ["Top right",    "top_right"],
+        ["Top left",     "top_left"]
+      ] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :watermark_opacity, "Opacity (10–80%)" %>
+      <%= f.number_field :watermark_opacity, min: 10, max: 80, step: 5 %>
+    </div>
+  </div>
+
+  <%= f.submit "Save settings", class: "btn btn--primary" %>
+<% end %>
+
+<div class="admin-section-sep"></div>
+
+<div class="admin-card">
+  <h2 class="admin-card__title">Regenerate watermarks</h2>
+  <p class="admin-hint">
+    Apply current watermark settings to all Field photos.
+    Runs in background. Existing watermarked versions will be replaced.
+  </p>
+  <%= button_to "Regenerate all watermarks",
+        regenerate_watermarks_admin_settings_path,
+        method: :post,
+        class: "btn btn--secondary",
+        data: { turbo_confirm: "This will re-process all Field photos in the background. Continue?" } %>
+</div>
