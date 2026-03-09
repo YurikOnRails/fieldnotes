@@ -1,23 +1,26 @@
 # Design System
 
-Reference aesthetic: Basecamp — warm, human, content-first. Not corporate, not a template.
+Design is not decoration. It's the argument you make about what matters.
+Reference aesthetic: Basecamp — warm, human, content-first. Not a template, not a dashboard, not a SaaS landing page.
 
 ---
 
-## Typography — self-hosted, no Google Fonts (privacy)
+## Typography — self-hosted, no Google Fonts
 
-Fonts live in `app/assets/fonts/`. No CDN requests, no third-party tracking.
+Fonts live in `app/assets/fonts/`. No CDN requests. No third-party tracking. No flash of wrong font.
 
 | Role | Font | Weights |
 |---|---|---|
 | Body + UI | **Onest** (supports Cyrillic + Latin) | 400, 500, 600, 700 |
 | Code blocks | **JetBrains Mono** | 400, 500 |
 
-`font-display: swap` on all `@font-face` declarations. Only `.woff2` — no other formats needed.
+`font-display: swap` on all `@font-face` declarations. Only `.woff2` — every browser that matters supports it, nothing else is needed.
 
 ---
 
 ## Design Tokens (`app/assets/stylesheets/tokens.css`)
+
+One source of truth for all visual decisions. Change a token here — it changes everywhere.
 
 ```css
 :root {
@@ -45,15 +48,16 @@ Fonts live in `app/assets/fonts/`. No CDN requests, no third-party tracking.
 
 ## Rules
 
-- Background `#FAF9F7`, cards `#FFFFFF` — warm contrast, not harsh white-on-white
-- Navigation: emoji + text label (`✍️ Essays`) — human, zero icon dependencies
-- Card hover: `translateY(-2px)` + `--shadow-hover` — pure CSS, no JS
-- Body text: 18–21px, 60–75 chars/line, mobile-first
-- Buttons: pill shape (`border-radius: 999px`), accent fill for CTA
-- Icons: Unicode emoji for nav · [Phosphor Icons](https://phosphoricons.com/) SVG sprite for UI chrome (MIT, multi-weight: use `light` for decorative, `bold` for functional). Self-hosted, no CDN.
-- Personal voice in every line — not corporate language
-- F-pattern: key words first in every heading
-- No dark mode in v1
+- **Warm background** — `#FAF9F7`, not pure white. Pure white is for hospitals. Cards `#FFFFFF` give gentle contrast without harshness.
+- **Navigation: emoji + text label** (`✍️ Essays`) — human, readable, zero icon dependency. Icons without text are puzzles.
+- **Card hover: `translateY(-2px)` + `--shadow-hover`** — pure CSS, no JS. If you need JavaScript to do a hover effect, you've lost the plot.
+- **Body text: 18–21px, 60–75 chars/line** — readable prose, not a mobile app. Mobile-first layout.
+- **Buttons: pill shape** (`border-radius: 999px`), accent fill for primary CTA — friendly, not corporate.
+- **Icons: Unicode emoji for nav · [Phosphor Icons](https://phosphoricons.com/) SVG sprite for UI chrome** (MIT, multi-weight: `light` for decorative, `bold` for functional). Self-hosted. No CDN.
+- **Personal voice in every line** — not corporate language, not generic filler. Every heading should sound like a human wrote it.
+- **F-pattern: key words first** in every heading — readers scan, not read.
+- **No dark mode in v1** — design with intention, not infinite toggle switches. Dark mode is a v2 decision once the light design is right.
+- **No animation libraries** — no GSAP, no Framer Motion, no AOS. CSS `transition` and `transform` are enough. If it can't be done in CSS, it probably shouldn't be done.
 
 ---
 
@@ -71,8 +75,8 @@ Fonts live in `app/assets/fonts/`. No CDN requests, no third-party tracking.
 └─────────────────────────────────────────────┘
 ```
 
-Animations — subtle, CSS-first:
+Animations — subtle, CSS-first, purposeful:
 - Fade-in on scroll via `IntersectionObserver` in Stimulus (`reveal_controller.js`)
-- Hover on tiles: `scale(1.02)` + shadow — pure CSS, no JS
+- Hover on tiles: `scale(1.02)` + shadow — pure CSS
 - Typewriter effect in hero tagline — one line, `typewriter_controller.js`
-- No parallax, no animation libraries (GSAP etc.), no spinning elements
+- No parallax. No spinning elements. No animations that serve the developer's ego instead of the reader's attention.
