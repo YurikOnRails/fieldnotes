@@ -21,6 +21,17 @@ article h2 {
 article h2 a { color: var(--color-text); }
 article h2 a:hover { color: var(--color-accent); }
 
+/* Кликабельная карточка целиком */
+.card-linked { position: relative; cursor: pointer; }
+
+.card-linked h2 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.card-linked:hover h2 a { color: var(--color-accent); }
+
 article p {
   color: var(--color-muted);
   margin-bottom: var(--space-3);
