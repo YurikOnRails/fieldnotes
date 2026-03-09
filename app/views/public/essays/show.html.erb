@@ -15,10 +15,6 @@
     <h1><%= @essay.title %></h1>
     <div class="essay-meta">
       <time datetime="<%= @essay.published_at.iso8601 %>"><%= @essay.published_at.strftime("%B %d, %Y") %></time>
-      <% if @essay.location_name.present? %>
-        <span>·</span>
-        <span><%= @essay.location_name %></span>
-      <% end %>
     </div>
     <div class="essay-content lexxy-content">
       <%= @essay.content %>

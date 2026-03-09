@@ -16,8 +16,9 @@
       <%= link_to "Builds", admin_builds_path, aria: { current: (controller_name == "builds" ? "page" : nil) } %>
       <%= link_to "Books",  admin_books_path,  aria: { current: (controller_name == "books" ? "page" : nil) } %>
       <%= link_to "Field",  admin_field_index_path, aria: { current: (controller_name.in?(%w[field field_items]) ? "page" : nil) } %>
-      <%= link_to "Profile",  edit_admin_profile_path, aria: { current: (controller_name == "profiles" ? "page" : nil) } %>
-      <%= link_to "Now",      edit_admin_now_path, aria: { current: (controller_name == "nows" ? "page" : nil) } %>
+      <span class="admin-nav__spacer"></span>
+      <%= link_to "Now",      edit_admin_now_path,      aria: { current: (controller_name == "nows"     ? "page" : nil) } %>
+      <%= link_to "Profile",  edit_admin_profile_path,  aria: { current: (controller_name == "profiles" ? "page" : nil) } %>
       <%= link_to "Settings", edit_admin_settings_path, aria: { current: (controller_name == "settings" ? "page" : nil) } %>
       <%= button_to "Sign out", session_path, method: :delete %>
     </nav>

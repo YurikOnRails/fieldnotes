@@ -49,7 +49,9 @@ body {
   background: rgba(255,255,255,0.07);
 }
 
-.admin-nav form { margin: 0 0 0 auto; }
+.admin-nav__spacer { flex: 1; }
+
+.admin-nav form { margin: 0; }
 
 .admin-nav button {
   background: none;
@@ -226,8 +228,8 @@ h2 { font-size: 1.0625rem; font-weight: 600; margin: 0 0 1rem; }
 .field textarea:focus,
 .field select:focus {
   outline: none;
-  border-color: #2D6A4F;
-  box-shadow: 0 0 0 3px rgba(45,106,79,0.12);
+  border-color: #E8722A;
+  box-shadow: 0 0 0 3px rgba(232,114,42,0.15);
 }
 
 .field textarea { resize: vertical; min-height: 5rem; }
@@ -285,12 +287,26 @@ h2 { font-size: 1.0625rem; font-weight: 600; margin: 0 0 1rem; }
 }
 
 .btn:focus-visible {
-  outline: 2px solid #2D6A4F;
+  outline: 2px solid #E8722A;
   outline-offset: 2px;
 }
 
-.btn--primary   { background: #2D6A4F; color: #fff; }
-.btn--primary:hover { background: #235A42; color: #fff; }
+/* ─── Danger zone ───────────────────────────────────────────────────────────── */
+
+.danger-zone {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.danger-zone__label {
+  font-size: 0.8125rem;
+  color: #78716C;
+  margin: 0;
+}
+
+.btn--primary   { background: #E8722A; color: #fff; }
+.btn--primary:hover { background: #D4631E; color: #fff; }
 
 .btn--secondary { background: #E8E3DC; color: #1C1917; }
 .btn--secondary:hover { background: #DDD8D0; color: #1C1917; }
@@ -300,8 +316,8 @@ h2 { font-size: 1.0625rem; font-weight: 600; margin: 0 0 1rem; }
 
 /* ─── Links ─────────────────────────────────────────────────────────────────── */
 
-a { color: #2D6A4F; text-decoration: none; }
-a:hover { color: #235A42; }
+a { color: #E8722A; text-decoration: none; }
+a:hover { color: #D4631E; }
 
 /* ─── Flash ─────────────────────────────────────────────────────────────────── */
 

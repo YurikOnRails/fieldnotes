@@ -11,6 +11,7 @@ class Book < ApplicationRecord
   validates :rating, inclusion: { in: 1..5 }, allow_nil: true
 
   scope :completed, -> { where(status: "completed") }
+  scope :reading,   -> { where(status: "reading") }
   scope :by_year,   -> { order(year_read: :desc) }
 
   def cover_image_url

@@ -41,9 +41,9 @@ h1, h2, h3, h4 {
   color: var(--color-text);
 }
 
-h1 { font-size: 2rem;   margin-bottom: var(--space-6); }
-h2 { font-size: 1.5rem; margin-bottom: var(--space-4); }
-h3 { font-size: 1.25rem; }
+h1 { font-size: 2rem;   margin-bottom: var(--space-6); letter-spacing: -0.025em; }
+h2 { font-size: 1.5rem; margin-bottom: var(--space-4); letter-spacing: -0.015em; }
+h3 { font-size: 1.25rem; letter-spacing: -0.01em; }
 
 p { margin-bottom: var(--space-4); }
 
@@ -83,3 +83,11 @@ pre code {
 }
 
 time { color: var(--color-muted); font-size: 0.875rem; }
+
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  margin: var(--space-6) 0;
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  color: var(--color-muted);
+  font-style: italic;
+}

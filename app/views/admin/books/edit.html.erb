@@ -2,3 +2,11 @@
   <h1>Edit Book</h1>
 </div>
 <%= render "form", book: @book %>
+
+<hr class="admin-section-sep">
+<div class="danger-zone">
+  <p class="danger-zone__label">Danger Zone</p>
+  <%= button_to "Delete Book", admin_book_path(@book), method: :delete,
+        form: { data: { turbo_confirm: "Delete «#{@book.title}»?" } },
+        class: "btn btn--danger btn--small" %>
+</div>

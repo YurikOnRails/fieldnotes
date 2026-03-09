@@ -3,3 +3,11 @@
   <%= link_to "View on site", field_path(@series.slug), target: "_blank", class: "btn btn--secondary" %>
 </div>
 <%= render "form", series: @series %>
+
+<hr class="admin-section-sep">
+<div class="danger-zone">
+  <p class="danger-zone__label">Danger Zone</p>
+  <%= button_to "Delete Series", admin_field_path(@series), method: :delete,
+        form: { data: { turbo_confirm: "Delete «#{@series.title}»?" } },
+        class: "btn btn--danger btn--small" %>
+</div>

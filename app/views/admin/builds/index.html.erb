@@ -14,9 +14,7 @@
           <td><%= link_to build.title, edit_admin_build_path(build) %></td>
           <td><%= build.kind %></td>
           <td><span class="badge badge--<%= build.status %>"><%= build.status %></span></td>
-          <td class="actions">
-            <%= button_to "Delete", admin_build_path(build), method: :delete, form: { data: { turbo_confirm: "Delete «#{build.title}»?" } }, class: "btn btn--danger" %>
-          </td>
+          <td class="actions"></td>
         </tr>
       <% end %>
     </tbody>

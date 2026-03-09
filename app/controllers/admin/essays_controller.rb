@@ -11,8 +11,9 @@ class Admin::EssaysController < Admin::BaseController
 
   def create
     @essay = Essay.new(essay_params)
+    apply_publish_intent(@essay)
     if @essay.save
-      redirect_to edit_admin_essay_url(@essay), notice: "Essay created"
+      redirect_to edit_admin_essay_url(@essay), notice: @essay.published? ? "Published!" : "Draft saved"
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,8 +23,10 @@ class Admin::EssaysController < Admin::BaseController
   end
 
   def update
-    if @essay.update(essay_params)
-      redirect_to edit_admin_essay_url(@essay), notice: "Essay updated"
+    @essay.assign_attributes(essay_params)
+    apply_publish_intent(@essay)
+    if @essay.save
+      redirect_to edit_admin_essay_url(@essay), notice: @essay.published? ? "Published!" : "Draft saved"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,5 +46,11 @@ class Admin::EssaysController < Admin::BaseController
   def essay_params
     params.require(:essay).permit(:title, :excerpt, :status, :published_at,
                                   :latitude, :longitude, :location_name, :cover, :content)
+  end
+
+  def apply_publish_intent(essay)
+    return unless params[:commit] == "Publish"
+    essay.status = "published"
+    essay.published_at ||= Time.current
   end
 end

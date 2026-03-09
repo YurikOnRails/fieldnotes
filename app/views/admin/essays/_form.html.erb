@@ -14,13 +14,19 @@
       <%= f.datetime_local_field :published_at %>
       <p class="field-hint">Leave blank — will be set automatically when published.</p>
     </div>
-    <div class="field"><%= f.label :location_name %><%= f.text_field :location_name %></div>
-    <div class="field"><%= f.label :cover %><%= f.file_field :cover %></div>
+<div class="field"><%= f.label :cover %><%= f.file_field :cover %></div>
   </div>
 
   <div class="admin-card">
     <div class="field"><%= f.label :content %><%= f.rich_text_area :content %></div>
   </div>
 
-  <%= f.submit class: "btn btn--primary" %>
+  <div class="form-actions">
+    <% if essay.published? %>
+      <%= f.submit "Save", class: "btn btn--primary" %>
+    <% else %>
+      <%= f.submit "Save Draft", class: "btn btn--secondary" %>
+      <%= f.submit "Publish", class: "btn btn--primary" %>
+    <% end %>
+  </div>
 <% end %>

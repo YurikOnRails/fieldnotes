@@ -15,9 +15,7 @@
           <td><%= book.author %></td>
           <td><span class="badge badge--<%= book.status %>"><%= book.status %></span></td>
           <td><%= book.rating ? "★" * book.rating : "—" %></td>
-          <td class="actions">
-            <%= button_to "Delete", admin_book_path(book), method: :delete, form: { data: { turbo_confirm: "Delete «#{book.title}»?" } }, class: "btn btn--danger" %>
-          </td>
+          <td class="actions"></td>
         </tr>
       <% end %>
     </tbody>
