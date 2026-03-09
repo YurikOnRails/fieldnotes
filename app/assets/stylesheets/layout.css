@@ -113,9 +113,16 @@ body {
 .site-footer a { color: var(--color-muted); }
 .site-footer a:hover { color: var(--color-accent); }
 
-/* Wide layout variant (field show, etc.) */
+/* Wide layout variant */
 .site-main--wide {
   max-width: var(--width-wide);
+}
+
+/* Field photo layout — full width, tiny side margins */
+.site-main--field {
+  max-width: 100%;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
 }
 
 /* Essay layout — wider than content, narrower than wide */

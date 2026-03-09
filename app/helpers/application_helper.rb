@@ -15,7 +15,8 @@ module ApplicationHelper
 
     srcset = [
       "#{url_for(attachment.variant(:medium))} 800w",
-      "#{url_for(attachment.variant(:full))} 1920w"
+      "#{url_for(attachment.variant(:full))}   1920w",
+      "#{url_for(attachment.variant(:retina))} 2560w"
     ].join(", ")
 
     tag.picture do

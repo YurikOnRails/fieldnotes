@@ -39,7 +39,7 @@
           <div class="field-figure__media">
             <%= picture_tag field_item_photo(item),
                   alt:     item.caption.presence || @series.title,
-                  sizes:   "100vw",
+                  sizes:   "(max-width: 768px) 100vw, (max-width: 1440px) 95vw, 1392px",
                   loading: index.zero? ? "eager" : "lazy" %>
           </div>
         <% elsif item.youtube_url.present? %>
