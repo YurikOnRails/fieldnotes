@@ -429,6 +429,14 @@ a:hover { color: #235A42; }
 .badge--video { background: #EDE9FE; color: #5B21B6; }
 .badge--mixed { background: #FEF3C7; color: #92400E; }
 
+/* ─── Book cover preview ───────────────────────────────────────────────────── */
+
+.book-cover-preview {
+  max-height: 160px;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
 /* ─── Auth layout ───────────────────────────────────────────────────────────── */
 
 .auth-body {

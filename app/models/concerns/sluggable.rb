@@ -12,6 +12,17 @@ module Sluggable
   private
 
   def generate_slug
-    self.slug = title.to_s.parameterize if slug.blank? && title.present?
+    return if slug.present? || title.blank?
+
+    base = title.parameterize
+    candidate = base
+    counter = 2
+
+    while self.class.exists?(slug: candidate)
+      candidate = "#{base}-#{counter}"
+      counter += 1
+    end
+
+    self.slug = candidate
   end
 end

@@ -5,4 +5,9 @@ class Public::BooksController < Public::BaseController
     @books = Book.by_year
     fresh_when @books
   end
+
+  def show
+    @book = Book.find(params[:id])
+    fresh_when @book
+  end
 end

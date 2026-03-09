@@ -29,4 +29,17 @@ class BuildTest < ActiveSupport::TestCase
   test "active scope excludes archived" do
     assert Build.active.none? { it.status == "archived" }
   end
+
+  # --- Slug auto-generation ---
+  test "auto-generates slug from title" do
+    build = Build.new(title: "Cool Project", status: "active", kind: "oss")
+    build.valid?
+    assert_equal "cool-project", build.slug
+  end
+
+  test "handles duplicate slugs for builds" do
+    Build.create!(title: "Side Hustle", status: "active", kind: "business", position: 10)
+    second = Build.create!(title: "Side Hustle", status: "active", kind: "business", position: 11)
+    assert_equal "side-hustle-2", second.slug
+  end
 end

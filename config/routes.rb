@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :essays,  only: [:index, :show], param: :slug
     resources :builds,  only: [:index]
-    resources :books,   only: [:index]
+    resources :books,   only: [:index, :show]
     resources :field,   only: [:index, :show], param: :slug
     get "/now",     to: "now#show",     as: :now
     get "/feed",    to: "feed#index",   as: :feed

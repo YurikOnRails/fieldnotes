@@ -21,4 +21,17 @@ class FieldSeriesTest < ActiveSupport::TestCase
     item_count = series.field_items.count
     assert_difference("FieldItem.count", -item_count) { series.destroy }
   end
+
+  # --- Slug auto-generation ---
+  test "auto-generates slug from title" do
+    series = FieldSeries.new(title: "Japan 2026", kind: "photo")
+    series.valid?
+    assert_equal "japan-2026", series.slug
+  end
+
+  test "handles duplicate slugs for series" do
+    FieldSeries.create!(title: "Mountains", kind: "photo")
+    second = FieldSeries.create!(title: "Mountains", kind: "video")
+    assert_equal "mountains-2", second.slug
+  end
 end

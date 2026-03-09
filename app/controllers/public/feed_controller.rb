@@ -1,6 +1,6 @@
 class Public::FeedController < Public::BaseController
   def index
-    @essays = Essay.published.limit(20)
+    @essays = Essay.published.includes(:cover_attachment).limit(20)
     fresh_when @essays
 
     respond_to do |format|

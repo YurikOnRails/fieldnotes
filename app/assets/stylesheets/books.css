@@ -1,0 +1,219 @@
+/* ─── Books grid (Writebook-style) ──────────────────────────────────────────── */
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-6) var(--space-6);
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 600px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Cover container — fixed aspect ratio for consistent grid */
+.book-card__cover {
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.book-card:hover .book-card__cover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.book-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder when no cover available */
+.book-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
+  text-align: center;
+}
+
+.book-card__placeholder span {
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Info below cover */
+.book-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.book-card__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.book-card__author {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+.book-card__rating {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  letter-spacing: 1px;
+}
+
+/* ─── Book show (Writebook-style split layout) ─────────────────────────────── */
+
+.book-show {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .book-show {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* Cover — sticky on desktop */
+.book-show__cover {
+  position: sticky;
+  top: calc(3.25rem + var(--space-8));
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-hover);
+}
+
+@media (max-width: 768px) {
+  .book-show__cover {
+    position: static;
+    max-width: 240px;
+  }
+}
+
+.book-show__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content — right side */
+.book-show__content {
+  min-width: 0;
+}
+
+.book-show__header {
+  margin-bottom: var(--space-8);
+}
+
+.book-show__header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+}
+
+.book-show__author {
+  font-size: 1.125rem;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.book-show__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.book-show__rating {
+  font-size: 1rem;
+  color: var(--color-accent);
+  letter-spacing: 1px;
+}
+
+.book-show__year {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+/* Status badges — reuse token colors */
+.book-show__status {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius-btn);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.badge--reading   { background: #1F1A2E; color: #C4B5FD; }
+.badge--completed { background: #1A2E22; color: #6EE7A0; }
+.badge--abandoned { background: #222; color: var(--color-muted); }
+
+/* Content sections */
+.book-show__section {
+  margin-bottom: var(--space-8);
+}
+
+.book-show__section h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-3);
+}
+
+.book-show__section p {
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.book-show__back {
+  margin-top: var(--space-12);
+  font-size: 0.875rem;
+}
+
+.book-show__back a {
+  color: var(--color-muted);
+}
+
+.book-show__back a:hover {
+  color: var(--color-accent);
+}

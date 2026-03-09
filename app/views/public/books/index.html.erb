@@ -2,8 +2,29 @@
 <% content_for :head do %>
   <%= meta_tags(title: "Reading", description: "Books I've read and key ideas from each.") %>
 <% end %>
+<% content_for :main_class, "site-main--wide" %>
 
 <h1>Reading</h1>
-<% @books.each do |book| %>
-  <%= render "shared/book_row", book: book %>
-<% end %>
+
+<div class="books-grid">
+  <% @books.each do |book| %>
+    <%= link_to book_path(book), class: "book-card" do %>
+      <div class="book-card__cover">
+        <% if book.cover_image_url.present? %>
+          <img src="<%= book.cover_image_url %>" alt="<%= book.title %>" loading="lazy">
+        <% else %>
+          <div class="book-card__placeholder">
+            <span><%= book.title %></span>
+          </div>
+        <% end %>
+      </div>
+      <div class="book-card__info">
+        <strong class="book-card__title"><%= book.title %></strong>
+        <span class="book-card__author"><%= book.author %></span>
+        <% if book.rating %>
+          <span class="book-card__rating"><%= "★" * book.rating %><%= "☆" * (5 - book.rating) %></span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

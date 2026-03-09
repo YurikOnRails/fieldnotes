@@ -6,13 +6,36 @@
   <% end %>
 
   <div class="admin-card">
+    <h2 class="admin-card__title">Book</h2>
+    <div class="field">
+      <%= f.label :isbn, "ISBN" %>
+      <%= f.text_field :isbn, placeholder: "e.g. 9780134757599" %>
+      <p class="field-hint">Enter ISBN — title, author, and cover will be fetched automatically.</p>
+    </div>
     <div class="field"><%= f.label :title %><%= f.text_field :title %></div>
     <div class="field"><%= f.label :author %><%= f.text_field :author %></div>
-    <div class="field"><%= f.label :cover_url %><%= f.url_field :cover_url %></div>
-    <div class="field"><%= f.label :year_read %><%= f.number_field :year_read %></div>
-    <div class="field"><%= f.label :rating %><%= f.number_field :rating, min: 1, max: 5 %></div>
+    <% if book.cover_image_url.present? %>
+      <div class="field">
+        <label>Cover preview</label>
+        <img src="<%= book.cover_image_url %>" alt="Cover" class="book-cover-preview">
+      </div>
+    <% end %>
+  </div>
+
+  <div class="admin-card">
+    <h2 class="admin-card__title">Your notes</h2>
     <div class="field"><%= f.label :status %><%= f.select :status, Book::STATUSES %></div>
-    <div class="field"><%= f.label :key_idea %><%= f.text_area :key_idea, rows: 4 %></div>
+    <div class="field"><%= f.label :rating %><%= f.number_field :rating, min: 1, max: 5 %></div>
+    <div class="field"><%= f.label :year_read %><%= f.number_field :year_read %></div>
+    <div class="field">
+      <%= f.label :key_idea, "Key idea (one sentence)" %>
+      <%= f.text_field :key_idea, placeholder: "The one thing you took away from this book" %>
+    </div>
+    <div class="field">
+      <%= f.label :review, "Notes & review" %>
+      <%= f.rich_text_area :review %>
+      <p class="field-hint">Quotes, thoughts, detailed notes. Supports formatting.</p>
+    </div>
   </div>
 
   <%= f.submit class: "btn btn--primary" %>

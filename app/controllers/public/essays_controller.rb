@@ -2,7 +2,7 @@ class Public::EssaysController < Public::BaseController
   rate_limit to: 60, within: 1.minute, only: :index
 
   def index
-    @essays = Essay.published
+    @essays = Essay.published.includes(:cover_attachment)
     fresh_when @essays
   end
 

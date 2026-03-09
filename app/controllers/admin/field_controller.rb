@@ -2,7 +2,7 @@ class Admin::FieldController < Admin::BaseController
   before_action :set_series, only: [:show, :edit, :update, :destroy]
 
   def index
-    @series = FieldSeries.order(created_at: :desc)
+    @series = FieldSeries.includes(field_items: :photo_attachment).order(created_at: :desc)
   end
 
   def show
@@ -40,7 +40,7 @@ class Admin::FieldController < Admin::BaseController
   private
 
   def set_series
-    @series = FieldSeries.find(params[:id])
+    @series = FieldSeries.includes(field_items: :photo_attachment).find(params[:id])
   end
 
   def field_series_params
