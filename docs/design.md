@@ -24,23 +24,38 @@ One source of truth for all visual decisions. Change a token here — it changes
 
 ```css
 :root {
-  --color-bg:           #FAF9F7;
-  --color-surface:      #FFFFFF;
-  --color-border:       #E8E3DC;
-  --color-text:         #1C1917;
-  --color-muted:        #78716C;
-  --color-accent:       #2D6A4F;
-  --color-accent-hover: #235A42;
+  --color-bg:           #0F0F0F;
+  --color-surface:      #1A1A1A;
+  --color-border:       #2E2E2E;
+  --color-text:         #E8E3DC;
+  --color-muted:        #888780;
+  --color-accent:       #E8722A;
+  --color-accent-hover: #F08040;
 
-  --font-sans:   'Onest', system-ui, sans-serif;
-  --font-mono:   'JetBrains Mono', monospace;
-  --text-base:   1.125rem;
-  --leading:     1.7;
+  --font-sans: 'Onest', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --text-base: 1.125rem;
+  --leading:   1.8;
 
-  --radius-card: 14px;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --width-content: 70ch;
+  --width-wide:    90rem;
+
+  --radius-card: 6px;
   --radius-btn:  999px;
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-hover: 0 4px 8px rgba(0,0,0,0.10), 0 12px 24px rgba(0,0,0,0.07);
+
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-hover: 0 4px 8px rgba(0,0,0,0.5), 0 12px 24px rgba(0,0,0,0.4);
+
+  --transition: 200ms ease;
 }
 ```
 
@@ -48,7 +63,7 @@ One source of truth for all visual decisions. Change a token here — it changes
 
 ## Rules
 
-- **Warm background** — `#FAF9F7`, not pure white. Pure white is for hospitals. Cards `#FFFFFF` give gentle contrast without harshness.
+- **Dark background** — `#0F0F0F` with `#1A1A1A` card surfaces. Deep but not pure black — pure black is harsh. The slight lift gives depth without blinding contrast.
 - **Navigation: emoji + text label** (`✍️ Essays`) — human, readable, zero icon dependency. Icons without text are puzzles.
 - **Card hover: `translateY(-2px)` + `--shadow-hover`** — pure CSS, no JS. If you need JavaScript to do a hover effect, you've lost the plot.
 - **Body text: 18–21px, 60–75 chars/line** — readable prose, not a mobile app. Mobile-first layout.
@@ -56,7 +71,7 @@ One source of truth for all visual decisions. Change a token here — it changes
 - **Icons: Unicode emoji for nav · [Phosphor Icons](https://phosphoricons.com/) SVG sprite for UI chrome** (MIT, multi-weight: `light` for decorative, `bold` for functional). Self-hosted. No CDN.
 - **Personal voice in every line** — not corporate language, not generic filler. Every heading should sound like a human wrote it.
 - **F-pattern: key words first** in every heading — readers scan, not read.
-- **No dark mode in v1** — design with intention, not infinite toggle switches. Dark mode is a v2 decision once the light design is right.
+- **Dark-first, single theme** — no toggle, no `prefers-color-scheme` switching. One design, done well. Orange accent (`#E8722A`) provides warmth against the dark canvas.
 - **No animation libraries** — no GSAP, no Framer Motion, no AOS. CSS `transition` and `transform` are enough. If it can't be done in CSS, it probably shouldn't be done.
 
 ---

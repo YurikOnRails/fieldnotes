@@ -20,7 +20,7 @@ body {
   max-width: var(--width-wide);
   margin: 0 auto;
   padding: 0 var(--space-6);
-  height: 3.25rem;
+  height: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,7 +57,7 @@ body {
 
 .site-nav-links a:hover {
   color: var(--color-text);
-  background: #2A2A2A;
+  background: var(--code-surface);
 }
 
 /* Active indicator */
@@ -139,11 +139,11 @@ body {
 }
 
 .flash--notice {
-  background: #1A2E22;
-  color: #6EE7A0;
+  background: var(--status-green-bg);
+  color: var(--status-green-text);
 }
 
 .flash--alert {
-  background: #2E1A1A;
-  color: #F87171;
+  background: var(--status-red-bg);
+  color: var(--status-red-text);
 }

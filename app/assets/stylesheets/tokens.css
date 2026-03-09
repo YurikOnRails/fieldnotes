@@ -7,6 +7,23 @@
   --color-accent:       #E8722A;
   --color-accent-hover: #F08040;
 
+  /* Status indicator colors */
+  --status-green-bg:    #1A2E22;
+  --status-green-text:  #6EE7A0;
+  --status-blue-bg:     #1A1F2E;
+  --status-blue-text:   #93C5FD;
+  --status-purple-bg:   #1F1A2E;
+  --status-purple-text: #C4B5FD;
+  --status-amber-bg:    #2A1E0A;
+  --status-amber-text:  #FBB040;
+  --status-red-bg:      #2E1A1A;
+  --status-red-text:    #F87171;
+
+  /* Code surfaces */
+  --code-surface: #2A2A2A;
+  --pre-surface:  #1E1E1E;
+  --code-text:    #E8C9A0;
+
   --font-sans: 'Onest', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --text-base: 1.125rem;
@@ -23,6 +40,7 @@
 
   --width-content: 70ch;
   --width-wide:    90rem;
+  --nav-height:    3.25rem;
 
   --radius-card: 6px;
   --radius-btn:  999px;

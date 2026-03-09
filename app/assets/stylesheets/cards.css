@@ -1,4 +1,4 @@
-article {
+.card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
@@ -8,18 +8,18 @@ article {
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-article:hover {
+.card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
 }
 
-article h2 {
+.card h2 {
   margin-bottom: var(--space-2);
   font-size: 1.25rem;
 }
 
-article h2 a { color: var(--color-text); }
-article h2 a:hover { color: var(--color-accent); }
+.card h2 a { color: var(--color-text); }
+.card h2 a:hover { color: var(--color-accent); }
 
 /* Кликабельная карточка целиком */
 .card-linked { position: relative; cursor: pointer; }
@@ -32,10 +32,30 @@ article h2 a:hover { color: var(--color-accent); }
 
 .card-linked:hover h2 a { color: var(--color-accent); }
 
-article p {
+.card p {
   color: var(--color-muted);
   margin-bottom: var(--space-3);
 }
+
+/* ─── Badge (shared base) ─────────────────────────────────────────────────── */
+
+.badge,
+.build-status,
+.book-show__status {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius-btn);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.badge--reading,   .build-status--reading   { background: var(--status-purple-bg); color: var(--status-purple-text); }
+.badge--completed, .build-status--active    { background: var(--status-green-bg);  color: var(--status-green-text); }
+.badge--abandoned, .build-status--archived  { background: var(--color-surface);    color: var(--color-muted); }
+                   .build-status--paused    { background: var(--status-amber-bg);  color: var(--status-amber-text); }
+                   .build-status--completed { background: var(--status-blue-bg);   color: var(--status-blue-text); }
 
 /* ─── Profile hero ───────────────────────────────────────────────────────── */
 
@@ -96,15 +116,12 @@ article p {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-bottom: 0;
-  box-shadow: none;
   transition: border-color var(--transition), transform var(--transition);
 }
 
 .build-card:hover {
   border-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: none;
 }
 
 .build-card__icon { font-size: 2rem; line-height: 1; }
@@ -126,22 +143,6 @@ article p {
   line-height: 1.6;
   margin: 0;
 }
-
-.build-status {
-  align-self: flex-start;
-  display: inline-block;
-  padding: 0.2em 0.65em;
-  border-radius: var(--radius-btn);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.build-status--active    { background: #1A2E22; color: #6EE7A0; }
-.build-status--paused    { background: #2A1E0A; color: #FBB040; }
-.build-status--completed { background: #1A1F2E; color: #93C5FD; }
-.build-status--archived  { background: #222; color: var(--color-muted); }
 
 /* ─── Books grid ──────────────────────────────────────────────────────────── */
 
@@ -195,7 +196,7 @@ article p {
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
-  background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
+  background: linear-gradient(135deg, var(--code-surface) 0%, var(--color-surface) 100%);
   text-align: center;
 }
 
@@ -248,7 +249,7 @@ article p {
 
 .book-show__cover {
   position: sticky;
-  top: calc(3.25rem + var(--space-8));
+  top: calc(var(--nav-height) + var(--space-8));
   aspect-ratio: 2 / 3;
   border-radius: var(--radius-card);
   overflow: hidden;
@@ -304,20 +305,6 @@ article p {
   font-size: 0.8125rem;
   color: var(--color-muted);
 }
-
-.book-show__status {
-  display: inline-block;
-  padding: 0.2em 0.65em;
-  border-radius: var(--radius-btn);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.badge--reading   { background: #1F1A2E; color: #C4B5FD; }
-.badge--completed { background: #1A2E22; color: #6EE7A0; }
-.badge--abandoned { background: #222; color: var(--color-muted); }
 
 .book-show__section { margin-bottom: var(--space-8); }
 
