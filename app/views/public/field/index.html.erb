@@ -1,9 +1,0 @@
-<% content_for :title, "Field" %>
-<% content_for :head do %>
-  <%= meta_tags(title: "Field", description: "Photo and video expedition series.") %>
-<% end %>
-
-<h1>Field</h1>
-<% @series.each do |series| %>
-  <%= render "shared/field_card", series: series %>
-<% end %>
