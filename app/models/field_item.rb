@@ -1,7 +1,7 @@
 class FieldItem < ApplicationRecord
   KINDS = %w[photo video].freeze
 
-  belongs_to :field_series
+  belongs_to :field_series, touch: true
   has_one_attached :photo
 
 

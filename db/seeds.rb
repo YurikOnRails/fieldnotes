@@ -315,4 +315,35 @@ field_series_data.each do |attrs|
 end
 puts "\nField series: #{FieldSeries.count}"
 
+# ─── Field Items ───────────────────────────────────────────────────────────────
+
+lisbon_series = FieldSeries.find_by(slug: "lisbon-to-porto-by-train")
+
+if lisbon_series && lisbon_series.field_items.empty?
+  photos = [
+    { file: "lisbon1.jpg",  caption: "Santa Apolónia station, Lisbon. Morning light through the iron canopy.", position: 1 },
+    { file: "train1.jpg",   caption: "Alfa Pendular heading north. The Tagus estuary fading behind.", position: 2 },
+    { file: "lisbon2.jpg",  caption: "Coastal stretch between Setúbal and Alcácer do Sal.", position: 3 },
+    { file: "porto1.jpg",   caption: "Arriving into Porto Campanhã. The Douro valley opens up.", position: 4 },
+    { file: "tiles1.jpg",   caption: "Azulejo panels on the platform wall at São Bento.", position: 5 },
+    { file: "porto2.jpg",   caption: "Ribeira at dusk. The bridge lights coming on.", position: 6 },
+  ]
+
+  photos.each do |p|
+    path = Rails.root.join("db/seeds/photos/#{p[:file]}")
+    item = lisbon_series.field_items.create!(
+      kind: "photo",
+      caption: p[:caption],
+      position: p[:position]
+    )
+    item.photo.attach(
+      io: File.open(path),
+      filename: p[:file],
+      content_type: "image/jpeg"
+    )
+    print "."
+  end
+  puts "\nField items: #{lisbon_series.field_items.count}"
+end
+
 puts "\nDone. Seed data loaded."

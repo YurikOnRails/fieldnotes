@@ -204,6 +204,7 @@ h2 { font-size: 1.0625rem; font-weight: 600; margin: 0 0 1rem; }
 .field input[type="text"],
 .field input[type="url"],
 .field input[type="email"],
+.field input[type="password"],
 .field input[type="number"],
 .field input[type="date"],
 .field input[type="datetime-local"],
@@ -336,4 +337,43 @@ a:hover { color: #235A42; }
   padding: 3rem 1.5rem;
   color: #78716C;
   font-size: 0.9375rem;
+}
+
+/* ─── Auth layout ───────────────────────────────────────────────────────────── */
+
+.auth-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #F5F4F2;
+}
+
+.auth-main {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.06);
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.auth-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  color: #1C1917;
+}
+
+.auth-card__footer {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #78716C;
 }

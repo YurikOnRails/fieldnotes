@@ -7,7 +7,7 @@ class Public::FieldController < Public::BaseController
   end
 
   def show
-    @series = FieldSeries.find_by!(slug: params[:slug])
+    @series = FieldSeries.includes(field_items: { photo_attachment: :blob }).find_by!(slug: params[:slug])
     Rails.event.notify("field.viewed", field_series_id: @series.id, path: request.path)
     fresh_when @series
   end
